@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">seng440_assignment1_gli65</string>
+    <string name="hello">"Hello %1$s"</string>
 </resources>
