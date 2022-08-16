@@ -22,7 +22,7 @@ fun MainScreen(navController: NavController) {
         verticalArrangement = Arrangement.Center,
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 50.dp)
+            .padding(horizontal = 50.dp, vertical = 10.dp)
     ) {
         TextField(
             value = text, onValueChange = {
