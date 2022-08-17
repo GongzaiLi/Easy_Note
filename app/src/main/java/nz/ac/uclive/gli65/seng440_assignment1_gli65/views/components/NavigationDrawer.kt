@@ -75,7 +75,7 @@ fun DrawerBody(
             Row(modifier = Modifier
                 .fillMaxWidth()
                 .clickable { onClick(category) }
-                .padding(20.dp),
+                .padding(15.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
