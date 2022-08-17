@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -90,7 +89,7 @@ fun DrawerBody(
                     style = TextStyle(fontSize = 18.sp),
                     color = Nevada
                 )
-                Spacer(modifier = Modifier.width(120.dp))
+                Spacer(modifier = Modifier.width(110.dp))
 
                 Box(
                     contentAlignment = Alignment.Center,
@@ -108,7 +107,6 @@ fun DrawerBody(
             }
         }
     }
-
-
 }
 
+// todo add Drawer footer

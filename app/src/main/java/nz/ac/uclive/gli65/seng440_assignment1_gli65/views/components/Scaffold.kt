@@ -16,16 +16,17 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Density
 import androidx.navigation.NavController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Category
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens.Test
 
 
 @Composable
 fun ScreenScaffold(screenName: String, navController: NavController) {
 
-    val categoriesList: List<Category> = listOf<Category>(
-        Category("type 1", "here is Type 1", icon = "ic_all_type_24"),
-        Category("type 2", "here is Type 2", icon = "ic_favorite_24"),
-        Category("type 3", "here is Type 3", icon = "ic_star_24"),
+    val categoriesList: List<Category> = listOf<Category>( // todo
+        Category(1, "type 1", "here is Type 1", icon = "ic_all_type_24"),
+        Category(2, "type 2", "here is Type 2", icon = "ic_favorite_24"),
+        Category(3, "type 3", "here is Type 3", icon = "ic_star_24"),
     )
 
     val scaffoldState = rememberScaffoldState() //  scaffold state
@@ -42,8 +43,7 @@ fun ScreenScaffold(screenName: String, navController: NavController) {
             DrawerBody(
                 categories = categoriesList,
                 onClick = {
-                    // todo when some here go some page
-                    println("Clicked on ${it.title}================") // it is function
+                    navController.navigate(Screen.EventScreen.route + "?category=${it.id}")
                 }
             )
         },

@@ -15,13 +15,13 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.components.ScreenScaff
 
 @Composable
 fun HomeScreen(navController: NavController) {
-
     ScreenScaffold("Here is Main", navController)
-
 }
 
 
-
+/**
+ * todo screen Ui detail here
+ */
 @Composable
 fun Test(navController: NavController) {
     var text by remember {

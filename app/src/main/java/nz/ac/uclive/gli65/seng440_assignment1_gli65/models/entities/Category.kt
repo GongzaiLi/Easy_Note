@@ -4,6 +4,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import java.io.FileDescriptor
 
 class Category(
+    val id: Int,
     val title: String,
     val contentDescriptor: String,
     val icon: String,

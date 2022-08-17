@@ -11,7 +11,6 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 @Composable
 fun DetailScreen(name: String?) {
 
-
     Box(modifier = Modifier.fillMaxSize()) {
         Text(text =  stringResource(R.string.hello, name?:""))
     }  // contentAlignment = Alignment.Center
