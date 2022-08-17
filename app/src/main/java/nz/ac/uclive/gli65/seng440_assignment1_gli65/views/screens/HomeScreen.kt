@@ -10,10 +10,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.components.ScreenScaffold
+
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun HomeScreen(navController: NavController) {
 
+    ScreenScaffold("Here is Main", navController)
+
+}
+
+
+
+@Composable
+fun Test(navController: NavController) {
     var text by remember {
         mutableStateOf("")
     }
