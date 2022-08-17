@@ -7,3 +7,5 @@ val Purple500 = Color(0xFF6200EE)
 val Purple700 = Color(0xFF3700B3)
 val Teal200 = Color(0xFF03DAC5)
 val BlueLight = Color(0xFFADD8E6)
+val Nevada = Color(0xFF666A6D) // https://www.color-meanings.com/shades-of-gray-color-names-html-hex-rgb-codes/
+val WhiteSmoke = Color(0xFFF5F5F5)
