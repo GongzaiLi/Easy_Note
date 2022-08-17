@@ -1,30 +1,32 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.components
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.width
+import android.content.res.Configuration
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.geometry.Size
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Outline
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.unit.Density
 import androidx.navigation.NavController
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.BlueLight
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens.Test
 
-//@Preview(showBackground = true)
+
 @Composable
 fun ScreenScaffold(screenName: String, navController: NavController) {
+
+    val categoriesList: List<Category> = listOf<Category>(
+        Category("type 1", "here is Type 1", icon = "ic_all_type_24"),
+        Category("type 2", "here is Type 2", icon = "ic_favorite_24"),
+        Category("type 3", "here is Type 3", icon = "ic_star_24"),
+    )
 
     val scaffoldState = rememberScaffoldState() //  scaffold state
     val scope = rememberCoroutineScope()
@@ -32,16 +34,18 @@ fun ScreenScaffold(screenName: String, navController: NavController) {
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopAppBar(
-                backgroundColor = BlueLight
-            ) {
-                TopBarRow(scope, scaffoldState, screenName) // todo screen name
-            }
+            TopBarRow(scope, scaffoldState, screenName) // todo screen name
         },
+        drawerShape = customShape(),
         drawerContent = {
-            Row {
-                Text(text = "here") // todo Add Row
-            }
+            DrawerHeader()
+            DrawerBody(
+                categories = categoriesList,
+                onClick = {
+                    // todo when some here go some page
+                    println("Clicked on ${it.title}================") // it is function
+                }
+            )
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
@@ -61,27 +65,37 @@ fun ScreenScaffold(screenName: String, navController: NavController) {
 }
 
 /**
- * Top Bar Row Ui
+ * https://solveforum.com/forums/threads/solved-how-set-width-to-drawer-in-jetpack-compose.350905/#post-350930
  */
 @Composable
-fun TopBarRow(scope: CoroutineScope, scaffoldState: ScaffoldState, screenName: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
+fun customShape() = object : Shape {
+    val configuration = LocalConfiguration.current
 
-        IconButton(
-            onClick = {
-                scope.launch {
-                    scaffoldState.drawerState.open()
-                }
-            }) {
-            Icon(
-                Icons.Filled.Menu,
-                contentDescription = "Menu", // Todo Icon description
-                tint = Color.White
-            )
+    override fun createOutline(
+        size: Size,
+        layoutDirection: LayoutDirection,
+        density: Density
+    ): Outline {
+
+        val right = when (configuration.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                size.width * 4f / 10f
+            }
+            else -> {
+                size.width * 9f / 10f
+            }
         }
 
-        Text(text = screenName, color = Color.White, textAlign = TextAlign.Center,
-            modifier = Modifier.width(150.dp), fontSize = 16.sp )
-
+        return Outline.Rectangle(
+            Rect(
+                left = 0f,
+                top = 0f,
+                right = right,
+                bottom = size.height
+            )
+        )
     }
 }
+
+
+
