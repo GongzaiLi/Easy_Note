@@ -5,6 +5,6 @@ import androidx.navigation.NavController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.components.ScreenScaffold
 
 @Composable
-fun EventScreen(categoryId: Int?, navController: NavController) { // will be in check
+fun EventScreen(categoryId: Int?, navController: NavController) { // will be in check todo pass category Id
     ScreenScaffold("Here is Event", navController)
 }

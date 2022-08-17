@@ -9,3 +9,6 @@ val Teal200 = Color(0xFF03DAC5)
 val BlueLight = Color(0xFFADD8E6)
 val Nevada = Color(0xFF666A6D) // https://www.color-meanings.com/shades-of-gray-color-names-html-hex-rgb-codes/
 val WhiteSmoke = Color(0xFFF5F5F5)
+val TextWhite = Color(0xFFEEEEEE)
+val AquaBlue = Color(0xFF9AA5C4)
+val LightRed = Color(0xfffc879a)

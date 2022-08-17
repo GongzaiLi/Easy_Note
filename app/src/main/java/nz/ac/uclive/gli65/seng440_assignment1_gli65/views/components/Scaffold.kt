@@ -16,8 +16,10 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Density
 import androidx.navigation.NavController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Category
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Event
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens.Test
+import java.time.LocalDateTime
 
 
 @Composable
@@ -27,6 +29,20 @@ fun ScreenScaffold(screenName: String, navController: NavController) {
         Category(1, "type 1", "here is Type 1", icon = "ic_all_type_24"),
         Category(2, "type 2", "here is Type 2", icon = "ic_favorite_24"),
         Category(3, "type 3", "here is Type 3", icon = "ic_star_24"),
+    )
+
+    val events: List<Event> = listOf(
+        Event(1, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(2, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
+        Event(3, "event1", LocalDateTime.now(), "Event 1 d", 1),
     )
 
     val scaffoldState = rememberScaffoldState() //  scaffold state
@@ -59,8 +75,10 @@ fun ScreenScaffold(screenName: String, navController: NavController) {
         },
     ) {
         // Screen content
-        Test(navController = navController) // todo
+        //Test(navController = navController) // todo
         //navigation
+
+        ScreenBody(events = events)
     }
 }
 
