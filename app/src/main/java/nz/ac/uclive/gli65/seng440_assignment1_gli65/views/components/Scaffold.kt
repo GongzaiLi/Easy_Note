@@ -25,24 +25,25 @@ import java.time.LocalDateTime
 @Composable
 fun ScreenScaffold(screenName: String, navController: NavController) {
 
+    // todo fix data
     val categoriesList: List<Category> = listOf<Category>( // todo
-        Category(1, "type 1", "here is Type 1", icon = "ic_all_type_24"),
-        Category(2, "type 2", "here is Type 2", icon = "ic_favorite_24"),
-        Category(3, "type 3", "here is Type 3", icon = "ic_star_24"),
+        Category("type 1", "here is Type 1", icon = "ic_all_type_24"),
+        Category("type 2", "here is Type 2", icon = "ic_favorite_24"),
+        Category("type 3", "here is Type 3", icon = "ic_star_24"),
     )
 
     val events: List<Event> = listOf(
-        Event(1, "event1asdsadshadkhakjshdjkaasdasdsadsa", LocalDateTime.now(), "Event 1 d", 1),
-        Event(2, "event2", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event3", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event4", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event5", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event6", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event7", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event8", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event9", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event10", LocalDateTime.now(), "Event 1 d", 1),
-        Event(3, "event11", LocalDateTime.now(), "Event 1 d", 1),
+        Event("event1asdsadshadkhakjshdjkaasdasdsadsa", LocalDateTime.now(), "Event 1 d", 1),
+        Event("event2", LocalDateTime.now(), "Event 1 d", 1),
+        Event("event3", LocalDateTime.now(), "Event 1 d", 1),
+        Event("event4", LocalDateTime.now(), "Event 1 d", 1),
+        Event("event5", LocalDateTime.now(), "Event 1 d", 1),
+        Event("event6", LocalDateTime.now(), "Event 1 d", 1),
+        Event( "event7", LocalDateTime.now(), "Event 1 d", 1),
+        Event( "event8", LocalDateTime.now(), "Event 1 d", 1),
+        Event( "event9", LocalDateTime.now(), "Event 1 d", 1),
+        Event( "event10", LocalDateTime.now(), "Event 1 d", 1),
+        Event( "event11", LocalDateTime.now(), "Event 1 d", 1),
     )
 
     val scaffoldState = rememberScaffoldState() //  scaffold state

@@ -1,16 +1,19 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities
 
-import androidx.lifecycle.LiveData
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.time.LocalDateTime
 
-// todo thinking about already due
+@Entity(tableName = "event")
 class Event(
-    val id: Int,
-    val title: String,
-    val endData: LocalDateTime,
-    val description: String,
-    val categoryId : Int,
+    @ColumnInfo var title: String,
+    @ColumnInfo var endData: LocalDateTime,
+    @ColumnInfo var description: String,
+    @ColumnInfo var categoryId : Long,
     //val color: String, // labels
     // members
 ) {
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
+    override fun toString() = title
 }

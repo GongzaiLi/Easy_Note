@@ -80,7 +80,7 @@ fun DrawerBody(
             ) {
                 Icon(
                     painter = painterResource(id = getIconFromDrawable(category.icon)),
-                    contentDescription = category.contentDescriptor,
+                    contentDescription = category.descriptor,
                     tint = Nevada
                 )
                 Spacer(modifier = Modifier.width(50.dp))
