@@ -18,13 +18,13 @@ class EventRepository(
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     override suspend fun updateEvent(event: Event) {
-        return eventDao.update(event)
+        eventDao.update(event)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     override suspend fun deleteEvent(event: Event) {
-        return eventDao.delete(event)
+        eventDao.delete(event)
     }
 
     override fun getEvents(): LiveData<List<Event>> {

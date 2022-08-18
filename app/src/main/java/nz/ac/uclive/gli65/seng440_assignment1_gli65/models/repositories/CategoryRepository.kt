@@ -18,13 +18,13 @@ class CategoryRepository(
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     override suspend fun updateCategory(category: Category) {
-        return categoryDao.update(category)
+        categoryDao.update(category)
     }
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     override suspend fun deleteCategory(category: Category) {
-        return categoryDao.delete(category)
+        categoryDao.delete(category)
     }
 
     override fun getCategories(): LiveData<List<Category>> {
