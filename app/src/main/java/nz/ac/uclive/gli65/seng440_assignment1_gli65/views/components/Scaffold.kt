@@ -33,17 +33,17 @@ fun ScreenScaffold(screenName: String, navController: NavController) {
     )
 
     val events: List<Event> = listOf(
-        Event("event1asdsadshadkhakjshdjkaasdasdsadsa", LocalDateTime.now(), "Event 1 d", 1),
-        Event("event2", LocalDateTime.now(), "Event 1 d", 1),
-        Event("event3", LocalDateTime.now(), "Event 1 d", 1),
-        Event("event4", LocalDateTime.now(), "Event 1 d", 1),
-        Event("event5", LocalDateTime.now(), "Event 1 d", 1),
-        Event("event6", LocalDateTime.now(), "Event 1 d", 1),
-        Event( "event7", LocalDateTime.now(), "Event 1 d", 1),
-        Event( "event8", LocalDateTime.now(), "Event 1 d", 1),
-        Event( "event9", LocalDateTime.now(), "Event 1 d", 1),
-        Event( "event10", LocalDateTime.now(), "Event 1 d", 1),
-        Event( "event11", LocalDateTime.now(), "Event 1 d", 1),
+        Event("event1asdsadshadkhakjshdjkaasdasdsadsa", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event("event2", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event("event3", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event("event4", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event("event5", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event("event6", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event( "event7", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event( "event8", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event( "event9", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event( "event10", toDateString(LocalDateTime.now()), "Event 1 d", 1),
+        Event( "event11", toDateString(LocalDateTime.now()), "Event 1 d", 1),
     )
 
     val scaffoldState = rememberScaffoldState() //  scaffold state

@@ -53,7 +53,7 @@ fun Card(event: Event) {
                 )
                 Spacer(modifier = Modifier.width(3.dp))
                 Text(
-                    text = getDateTime(event.endData),
+                    text = getDateTime(getLocalDateTime(event.endData)),
                     style = MaterialTheme.typography.body1,
                     color = TextWhite
                 ) //
@@ -78,3 +78,11 @@ fun getDateTime(data: LocalDateTime): String {
 }
 
 fun formatNumber(number: Int): String = if (number < 10) "0$number" else "$number"
+
+fun getLocalDateTime(dateString: String): LocalDateTime {
+    return LocalDateTime.parse(dateString)
+}
+
+fun toDateString(date: LocalDateTime): String {
+    return date.toString()
+}

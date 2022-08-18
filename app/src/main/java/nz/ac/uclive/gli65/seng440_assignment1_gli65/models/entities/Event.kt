@@ -4,11 +4,12 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.LocalDateTime
+import java.time.OffsetDateTime
 
 @Entity(tableName = "event")
 class Event(
     @ColumnInfo var title: String,
-    @ColumnInfo var endData: LocalDateTime,
+    @ColumnInfo var endData: String,
     @ColumnInfo var description: String,
     @ColumnInfo var categoryId : Long,
     //val color: String, // labels
