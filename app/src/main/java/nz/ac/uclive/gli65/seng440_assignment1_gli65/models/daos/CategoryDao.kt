@@ -18,14 +18,14 @@ interface CategoryDao {
     suspend fun delete(category: Category)
 
     @Query("SELECT * FROM category")
-    fun getAll(): LiveData<List<Category>>
+    fun getAll(): LiveData<List<Category>>  // can be Flow
 
 
     @Query("SELECT COUNT(*) FROM category")
-    fun getCount(): LiveData<Int> // why nor suspend
+    fun getCount(): LiveData<Int>
 
     // todo not sure
     @Query("SELECT * FROM category WHERE id = :categoryId")
 //    fun findById(categoryId: Long): LiveData<Category>
-    fun findById(categoryId: Long): Category?
+    suspend fun findById(categoryId: Long): Category?
 }

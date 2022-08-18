@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 import java.time.OffsetDateTime
 
 @Entity(tableName = "event")
-class Event(
+data class Event(
     @ColumnInfo var title: String,
     @ColumnInfo var endData: String,
     @ColumnInfo var description: String,
@@ -16,5 +16,6 @@ class Event(
     // members
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0
-    override fun toString() = title
+
+    // color 
 }

@@ -5,11 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "category")
-class Category(
+data class Category(
     @ColumnInfo var title: String,
     @ColumnInfo var descriptor: String,
     @ColumnInfo var icon: String,
 ) {
     @PrimaryKey(autoGenerate = true) var id: Long = 0
-    override fun toString() = title
 }

@@ -24,7 +24,7 @@ interface EventDao {
     fun getCount(): LiveData<Int> // why nor suspend
 
     @Query("SELECT * FROM event WHERE id  = :id")
-    fun findById(id: Long): LiveData<Event>
+    suspend fun findById(id: Long): Event?
 
     @Query("SELECT * FROM event WHERE categoryId  = :categoryId")
     fun findByCategoryId(categoryId: Long): LiveData<List<Event>>
