@@ -82,9 +82,9 @@ dependencies {
     // Icons
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
-    // Room
+    // Set up Room
     apply plugin: 'kotlin-kapt'
-    def room_version = "2.4.3"
+    def room_version = "2.5.0-alpha02"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
@@ -93,5 +93,6 @@ dependencies {
 
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+
 
 }
