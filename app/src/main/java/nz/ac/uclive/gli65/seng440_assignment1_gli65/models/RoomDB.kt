@@ -1,20 +1,22 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.models
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.daos.CategoryDao
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.daos.EventDao
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Event
 
-@Database(entities = [Event::class, Category::class], version = 1)
-abstract class AppDatabase : RoomDatabase() {
-    abstract fun EventDao(): EventDao
-    abstract fun CategoryDao(): CategoryDao
+@Database(entities = [Category::class, Event::class], version = 3)
+abstract class RoomDB : RoomDatabase() {
+    abstract val categoryDao: CategoryDao
+    abstract val eventDao: EventDao
 
     companion object {
+        const val DATABASE_NAME = "event_db"
+    }
+    /*
+     companion object {
         // Singleton prevents multiple instances of database opening at the same time.
         @Volatile
         private var INSTANCE: AppDatabase? = null
@@ -26,12 +28,14 @@ abstract class AppDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "Todo_database"
-                ).build()
+                    "app_database"
+                ).createFromAsset("database/simple.db").build()
                 INSTANCE = instance
                 // return instance
                 instance
             }
         }
     }
+     */
+
 }

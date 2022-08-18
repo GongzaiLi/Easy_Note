@@ -1,0 +1,1 @@
+INSERT INTO category VALUES("All", "All events", "ic_all_type_24");

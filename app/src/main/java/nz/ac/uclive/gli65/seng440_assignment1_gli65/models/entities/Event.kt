@@ -8,14 +8,11 @@ import java.time.OffsetDateTime
 
 @Entity(tableName = "event")
 data class Event(
-    @ColumnInfo var title: String,
-    @ColumnInfo var endData: String,
-    @ColumnInfo var description: String,
-    @ColumnInfo var categoryId : Long,
+    val title: String,
+    val endData: String,
+    val description: String,
+    val categoryId: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     //val color: String, // labels
     // members
-) {
-    @PrimaryKey(autoGenerate = true) var id: Long = 0
-
-    // color 
-}
+)

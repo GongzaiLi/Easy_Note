@@ -1,18 +1,19 @@
-package nz.ac.uclive.gli65.seng440_assignment1_gli65
+package nz.ac.uclive.gli65.seng440_assignment1_gli65.views
 
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens.DetailScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens.HomeScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens.EventScreen
 
 
+@ExperimentalAnimationApi
 @Composable
 fun Navigation() {
 

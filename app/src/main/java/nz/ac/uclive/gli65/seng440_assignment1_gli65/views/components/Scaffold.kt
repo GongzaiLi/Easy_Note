@@ -1,6 +1,9 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.components
 
 import android.content.res.Configuration
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.geometry.Size
 import androidx.compose.material.*
@@ -18,10 +21,9 @@ import androidx.navigation.NavController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entities.Event
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens.Test
 import java.time.LocalDateTime
 
-
+@ExperimentalAnimationApi
 @Composable
 fun ScreenScaffold(screenName: String, navController: NavController) {
 

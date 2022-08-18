@@ -6,9 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "category")
 data class Category(
-    @ColumnInfo var title: String,
-    @ColumnInfo var descriptor: String,
-    @ColumnInfo var icon: String,
-) {
-    @PrimaryKey(autoGenerate = true) var id: Long = 0
-}
+    val title: String,
+    val descriptor: String,
+    val icon: String,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0
+)

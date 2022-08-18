@@ -1,5 +1,6 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screens
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.Text
@@ -8,13 +9,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.components.ScreenScaffold
 
-
+@ExperimentalAnimationApi
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController, viewModel: EventViewModel = hiltViewModel()) {
+
+    val viewModelState = viewModel.state.value
+    println("VM 1111111111")
+
     ScreenScaffold("Here is Main", navController)
 }
 
