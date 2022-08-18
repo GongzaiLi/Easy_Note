@@ -5,7 +5,6 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
-
 android {
     compileSdk 31
 
@@ -50,7 +49,6 @@ android {
     }
 }
 
-
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.6.0'
@@ -89,9 +87,4 @@ dependencies {
 
     // Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:2.3.0"
-
-    // Icons
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
-
-
 }
