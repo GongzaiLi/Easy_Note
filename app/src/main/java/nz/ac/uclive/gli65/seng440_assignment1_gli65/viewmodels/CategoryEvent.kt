@@ -8,7 +8,9 @@ sealed class CategoryEvent {
 
     data class AddCategory(val category: Category) : CategoryEvent()
 
-    object GetCategories : CategoryEvent()
+    //data class PickCategory(val categoryId: Int): CategoryEvent()
+
+    //object GetCategories : CategoryEvent()
 
     // todo more event
 }
