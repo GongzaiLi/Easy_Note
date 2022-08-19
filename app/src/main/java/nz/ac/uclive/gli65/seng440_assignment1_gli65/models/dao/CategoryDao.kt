@@ -1,12 +1,12 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.models.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 
 @Dao
 interface CategoryDao {
+
     @Insert
     suspend fun insert(category: Category): Long
 
