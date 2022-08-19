@@ -17,5 +17,5 @@ interface ICategoryRepository { // Repository
 
     fun getCountCategory(): Flow<Int>
 
-    suspend fun getCategoryById(categoryId: Long): Category?
+    fun getCategoryById(categoryId: Long): Flow<Category>?
 }

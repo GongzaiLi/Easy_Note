@@ -37,7 +37,7 @@ class CategoryRepositoryImpl(private val dao: CategoryDao) : ICategoryRepository
     }
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    override suspend fun getCategoryById(categoryId: Long): Category? {
+    override fun getCategoryById(categoryId: Long): Flow<Category>? {
         return getCategoryById(categoryId)
     }
 

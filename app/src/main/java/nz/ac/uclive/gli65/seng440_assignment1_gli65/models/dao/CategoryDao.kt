@@ -26,5 +26,5 @@ interface CategoryDao {
     // todo not sure
     @Query("SELECT * FROM category WHERE id = :categoryId")
 //    fun findById(categoryId: Long): LiveData<Category>
-    suspend fun findById(categoryId: Long): Category?
+    fun findById(categoryId: Long): Flow<Category>?
 }

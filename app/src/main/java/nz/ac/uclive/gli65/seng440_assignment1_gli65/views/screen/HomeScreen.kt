@@ -49,7 +49,7 @@ fun ScreenScaffold(navController: NavController, categoryViewModel: CategoryView
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
-    val screenName : String = "";
+    val screenName : String = categoryState.screenName;
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
@@ -61,6 +61,10 @@ fun ScreenScaffold(navController: NavController, categoryViewModel: CategoryView
             DrawerBody(
                 categories = categoryState.categories,
                 onClick = {
+                    categoryViewModel.onEvent(CategoryEvent.PickCategory(it))
+                    scope.launch {
+                        scaffoldState.drawerState.close()
+                    }
                     //navController.navigate(Screen.EventScreen.route + "?category=${it.id}") todo
                 }
             )

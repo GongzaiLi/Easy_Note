@@ -40,6 +40,12 @@ class CategoryViewModel @Inject constructor(
                     categoryUseCases.addUseCase(event.category)
                 }
             }
+            is CategoryEvent.PickCategory -> {
+                _state.value = state.value.copy(
+                    pickCategory = event.category,
+                    screenName = event.category.title
+                )
+            }
 //            is CategoryEvent.PickCategory -> {
 //
 //            }
@@ -61,6 +67,8 @@ class CategoryViewModel @Inject constructor(
             .onEach { categories ->
                 _state.value = state.value.copy(
                     categories = categories,
+                    pickCategory = categories[0],
+                    screenName = categories[0].title
                 )
             }
             .launchIn(viewModelScope)
