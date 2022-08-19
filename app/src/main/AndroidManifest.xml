@@ -3,6 +3,7 @@
     package="nz.ac.uclive.gli65.seng440_assignment1_gli65">
 
     <application
+        android:name=".RunApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,7 +13,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.Seng440_assignment1_gli65">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
