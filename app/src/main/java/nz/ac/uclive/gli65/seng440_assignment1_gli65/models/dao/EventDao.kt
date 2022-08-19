@@ -24,7 +24,7 @@ interface EventDao {
     fun getCount(): Flow<Int> // why nor suspend
 
     @Query("SELECT * FROM event WHERE id  = :id")
-    suspend fun findById(id: Long): Flow<Event>?
+    suspend fun findById(id: Long): Event?
 
     @Query("SELECT * FROM event WHERE categoryId  = :categoryId")
     fun findByCategoryId(categoryId: Long): Flow<List<Event>>
