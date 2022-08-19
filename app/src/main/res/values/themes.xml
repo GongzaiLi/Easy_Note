@@ -2,6 +2,6 @@
 <resources>
 
     <style name="Theme.Seng440_assignment1_gli65" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:statusBarColor">@color/blue_light</item>
     </style>
 </resources>
