@@ -7,7 +7,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.dao.EventDao
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
 
-@Database(entities = [Category::class, Event::class], version = 2)
+@Database(entities = [Category::class, Event::class], version = 3)
 abstract class MainDB : RoomDatabase() {
 
     abstract val categoryDao: CategoryDao

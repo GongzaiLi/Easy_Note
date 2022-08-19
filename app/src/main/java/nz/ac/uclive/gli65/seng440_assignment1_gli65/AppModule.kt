@@ -27,7 +27,7 @@ object AppModule {
         return Room.databaseBuilder(
             app, MainDB::class.java,
             MainDB.DATABASE_NAME
-        ).allowMainThreadQueries().build()
+        ).createFromAsset("database/simple.db").build()
     }
 
     @Provides

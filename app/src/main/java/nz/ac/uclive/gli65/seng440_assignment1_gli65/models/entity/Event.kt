@@ -8,8 +8,8 @@ data class Event(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
     val timestamp: String,
-    val description: String,
-    val categoryId: Long,
+    val description: String?,
+    val categoryId: Long?, // todo not sure
     val color: Int,
 ) {
     // todo color

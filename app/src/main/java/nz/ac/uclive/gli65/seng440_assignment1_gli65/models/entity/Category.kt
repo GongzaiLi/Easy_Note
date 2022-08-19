@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "category")
 data class Category(
-    @PrimaryKey(autoGenerate = true) val id: Long,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
     val title: String,
-    val description: String,
+    val description: String?,
     val icon: String,
 ) {
     companion object {
-        val categoryIcon = listOf<String>("icon1", "icon2")
+        val categoryIcon = listOf<String>("ic_all_type_24", "ic_life_24", "ic_star_24")
     }
 }
