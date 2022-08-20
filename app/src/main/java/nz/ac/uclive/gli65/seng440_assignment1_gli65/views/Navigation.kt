@@ -1,11 +1,14 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation.NavGraphBuilder
+
+import com.google.accompanist.navigation.animation.composable
+import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.AddCategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
 
@@ -13,27 +16,73 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
 @Composable
 fun Navigation() {
 
-    val navController = rememberNavController()
+    val navController = rememberAnimatedNavController()
     //val navController = rememberAnimatedNavController()
 
-    NavHost(
+    val width = 300
+
+
+    AnimatedNavHost(
         navController = navController,
         startDestination = Screen.HomeScreen.route
     ) {
         composable(
             Screen.HomeScreen.route,
+            exitTransition = { _, _ ->
+                slideOutHorizontally(
+                    targetOffsetX = { -width },
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeOut(animationSpec = tween(300))
+            },
+            popEnterTransition = { initial, _ ->
+                slideInHorizontally(
+                    initialOffsetX = { -width },
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeIn(animationSpec = tween(300))
+            },
+            enterTransition = { initial, _ ->
+                slideInHorizontally(
+                    initialOffsetX = { -width },
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeIn(animationSpec = tween(300))
+            },
         ) {
-            EnterAnimation {
-                HomeScreen(navController = navController)
-            }
-
+            HomeScreen(navController = navController)
         }
 
-        composable(route = Screen.AddCategoryScreen.route) {
+        composable(
+            route = Screen.AddCategoryScreen.route,
+            enterTransition = { _, _ ->
+                slideInHorizontally(
+                    initialOffsetX = { width },
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeIn(animationSpec = tween(300))
+            },
+            popExitTransition = { _, target ->
+                slideOutHorizontally(
+                    targetOffsetX = { width },
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeOut(animationSpec = tween(300))
+            },
+        ) {
 
-            EnterAnimation {
-                AddCategoryScreen(navController = navController)
-            }
+
+            AddCategoryScreen(navController = navController)
 
         }
 
@@ -69,19 +118,6 @@ fun Navigation() {
  */
 }
 
-@ExperimentalAnimationApi
-@Composable
-fun EnterAnimation(content: @Composable () -> Unit) {
-    AnimatedVisibility(
-        visible = true,
-        enter = slideInVertically(
-            initialOffsetY = { -40 }
-        ) + expandVertically(
-            expandFrom = Alignment.Top
-        ) + fadeIn(initialAlpha = 0.3f),
-        exit = slideOutVertically() + shrinkVertically() + fadeOut(),
-        content = content,
-        initiallyVisible = false
-    )
-}
+
+
 

@@ -22,6 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.*
@@ -120,13 +122,13 @@ fun DrawerBody(
 }
 
 @Composable
-fun DrawerFooter(navController: NavController) {
+fun DrawerFooter(onClick: () -> Unit) {
     Divider(color = LightGray, thickness = 1.dp)
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .clickable {
-                navController.navigate(Screen.AddCategoryScreen.route)
+                onClick()
             }
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically,

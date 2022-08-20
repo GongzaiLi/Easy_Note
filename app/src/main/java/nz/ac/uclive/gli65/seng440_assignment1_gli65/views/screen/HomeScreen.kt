@@ -2,17 +2,11 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
 import android.content.res.Configuration
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -20,22 +14,18 @@ import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.BlueLight
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.*
 
-
+@ExperimentalAnimationApi
 @Composable
 fun HomeScreen(
     navController: NavController,
@@ -76,14 +66,18 @@ fun HomeScreenScaffold(
                 categories = categoryState.categories,
                 onClick = {
                     categoryViewModel.onEvent(CategoryEvent.PickCategory(it))
-
                     scope.launch {
                         scaffoldState.drawerState.close()
                     }
                     //navController.navigate(Screen.EventScreen.route + "?category=${it.id}") todo
                 }
             )
-            DrawerFooter(navController)
+            DrawerFooter(onClick = {
+                scope.launch {
+                    scaffoldState.drawerState.close()
+                }
+                navController.navigate(Screen.AddCategoryScreen.route)
+            })
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {

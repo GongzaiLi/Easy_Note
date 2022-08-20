@@ -9,9 +9,10 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.Seng440_assignment1
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Navigation
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
 
+@ExperimentalAnimationApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @ExperimentalAnimationApi
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

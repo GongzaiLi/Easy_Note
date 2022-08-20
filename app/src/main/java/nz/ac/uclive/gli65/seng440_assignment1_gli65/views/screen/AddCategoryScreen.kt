@@ -13,13 +13,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerBody
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerFooter
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerHeader
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.ScreenTopBarRow
 
+@ExperimentalAnimationApi
 @Composable
 fun AddCategoryScreen(
     navController: NavController,
@@ -35,7 +31,11 @@ fun AddCategoryScreenScaffold(navController: NavController) {
                 "ic_arrow_back_24",
                 stringResource(R.string.category_edit),
                 onClick = {
-                    navController.navigate(Screen.HomeScreen.route)
+//                    navController.popBackStack() // cannot go back
+//                    navController.navigate(Screen.HomeScreen.route)
+                    navController.navigateUp()
+
+
                 }
             )
         },
