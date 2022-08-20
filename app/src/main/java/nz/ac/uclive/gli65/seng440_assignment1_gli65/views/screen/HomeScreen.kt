@@ -113,7 +113,7 @@ fun customShape() = object : Shape {
 
         val right = when (configuration.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> {
-                size.width * 4f / 10f
+                size.width * 9f / 10f // todo
             }
             else -> {
                 size.width * 9f / 10f

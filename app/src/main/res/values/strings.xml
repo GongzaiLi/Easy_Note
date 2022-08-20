@@ -3,4 +3,7 @@
     <string name="main_screen_name">ToDo Matter · %1$s</string>
     <string name="drawer_header">ToDo Matter</string>
     <string name="category_edit">Manager Category</string>
+    <string name="category_confirm_delete">Confirm Delete?</string>
+    <string name="cancel_button">CANCEL</string>
+    <string name="delete_button">DELETE</string>
 </resources>

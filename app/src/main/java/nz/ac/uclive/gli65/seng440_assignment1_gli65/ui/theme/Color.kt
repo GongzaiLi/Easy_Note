@@ -10,6 +10,8 @@ val WhiteSmoke = Color(0xFFF5F5F5)
 val AppleGreen = Color(0xFFB0E400)
 val TextWhite = Color(0xFFEEEEEE)
 val LightGray = Color(0xFFD3D3D3)
+val AquaBlue = Color(0xFF9AA5C4)
+val LightRed = Color(0xfffc879a)
 
 val RedOrange = Color(0xffffab91)
 val RedPink = Color(0xfff48fb1)
