@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
@@ -27,6 +28,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.BlueLight
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
@@ -42,18 +44,25 @@ fun HomeScreen(
 }
 
 @Composable
-fun ScreenScaffold(navController: NavController, categoryViewModel: CategoryViewModel = hiltViewModel()) {
+fun ScreenScaffold(
+    navController: NavController,
+    categoryViewModel: CategoryViewModel = hiltViewModel()
+) {
 
     val categoryState = categoryViewModel.state.value
 
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
-    val screenName : String = categoryState.screenName;
+    val screenName: String = categoryState.screenName
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopBarRow(scope, scaffoldState, screenName) // todo screen name
+            TopBarRow(
+                scope,
+                scaffoldState,
+                stringResource(R.string.main_screen_name, screenName)
+            ) // todo screen name
         },
         drawerShape = customShape(),
         drawerContent = {
@@ -62,6 +71,7 @@ fun ScreenScaffold(navController: NavController, categoryViewModel: CategoryView
                 categories = categoryState.categories,
                 onClick = {
                     categoryViewModel.onEvent(CategoryEvent.PickCategory(it))
+
                     scope.launch {
                         scaffoldState.drawerState.close()
                     }

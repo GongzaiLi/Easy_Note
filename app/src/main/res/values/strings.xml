@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">seng440_assignment1_gli65</string>
+    <string name="app_name">ToDo Matter</string>
+    <string name="main_screen_name">ToDo Matter · %1$s</string>
+    <string name="drawer_header">ToDo Matter</string>
 </resources>

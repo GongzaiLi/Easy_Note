@@ -16,10 +16,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.BlueLight
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.LightBlue
@@ -44,15 +46,14 @@ fun DrawerHeader() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             val color = Color.White
-            val name = "ic_header_24" // todo fix
             Icon(
-                painter = painterResource(id = getIconFromDrawable(name)),
+                painter = painterResource(id = getIconFromDrawable("ic_header_24")),
                 contentDescription = null,
                 tint = color
             )
             Spacer(modifier = Modifier.width(40.dp))
             Text(
-                text = "Header", // todo R.string
+                text = stringResource(R.string.drawer_header), // todo R.string
                 modifier = Modifier.weight(1f),
                 style = TextStyle(fontSize = 20.sp),
                 color = color
@@ -91,7 +92,8 @@ fun DrawerBody(
                     style = TextStyle(fontSize = 18.sp),
                     color = Nevada,
                     modifier = Modifier
-                        .align(Alignment.CenterVertically).weight(0.4f)
+                        .align(Alignment.CenterVertically)
+                        .weight(0.4f)
                 )
                 Spacer(modifier = Modifier.weight(0.1f))
                 Box(
@@ -100,7 +102,8 @@ fun DrawerBody(
                         .width(40.dp)
                         .height(30.dp)
                         .clip(RoundedCornerShape(10.dp))
-                        .background(WhiteSmoke).weight(0.1f)
+                        .background(WhiteSmoke)
+                        .weight(0.1f)
 
                 ) {
                     Text(
