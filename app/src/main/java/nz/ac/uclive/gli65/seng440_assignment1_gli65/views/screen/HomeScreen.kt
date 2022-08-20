@@ -1,6 +1,7 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
 import android.content.res.Configuration
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
@@ -32,20 +33,19 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.BlueLight
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerBody
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerFooter
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerHeader
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.*
 
 
 @Composable
 fun HomeScreen(
     navController: NavController,
 ) {
-    ScreenScaffold(navController = navController)
+    HomeScreenScaffold(navController = navController)
 }
 
+
 @Composable
-fun ScreenScaffold(
+fun HomeScreenScaffold(
     navController: NavController,
     categoryViewModel: CategoryViewModel = hiltViewModel()
 ) {
@@ -59,11 +59,15 @@ fun ScreenScaffold(
     Scaffold(
         scaffoldState = scaffoldState,
         topBar = {
-            TopBarRow(
-                scope,
-                scaffoldState,
-                stringResource(R.string.main_screen_name, screenName)
-            ) // todo screen name
+            ScreenTopBarRow(
+                "ic_menu_24",
+                stringResource(R.string.main_screen_name, screenName),
+                onClick = {
+                    scope.launch {
+                        scaffoldState.drawerState.open()
+                    }
+                }
+            )
         },
         drawerShape = customShape(),
         drawerContent = {
@@ -79,7 +83,7 @@ fun ScreenScaffold(
                     //navController.navigate(Screen.EventScreen.route + "?category=${it.id}") todo
                 }
             )
-            DrawerFooter()
+            DrawerFooter(navController)
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
@@ -134,36 +138,3 @@ fun customShape() = object : Shape {
 }
 
 
-/**
- * Top Bar Row Ui
- */
-@Composable
-fun TopBarRow(scope: CoroutineScope, scaffoldState: ScaffoldState, screenName: String) {
-    TopAppBar(
-        backgroundColor = BlueLight
-    ) {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-
-            IconButton(
-                onClick = {
-                    scope.launch {
-                        scaffoldState.drawerState.open()
-                    }
-                }) {
-                Icon(
-                    Icons.Filled.Menu,
-                    contentDescription = "Menu", // Todo Icon description
-                    tint = Color.White
-                )
-            }
-            Spacer(modifier = Modifier.width(20.dp))
-            Text(
-                text = screenName,
-                color = Color.White,
-                textAlign = TextAlign.Center,
-                fontSize = 20.sp
-            )
-
-        }
-    }
-}

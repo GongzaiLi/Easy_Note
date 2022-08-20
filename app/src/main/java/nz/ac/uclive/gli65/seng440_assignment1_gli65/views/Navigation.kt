@@ -1,32 +1,45 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views
 
+import androidx.compose.animation.*
 import androidx.compose.runtime.Composable
-
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.Alignment
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.AddCategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
 
+@ExperimentalAnimationApi
 @Composable
 fun Navigation() {
 
     val navController = rememberNavController()
+    //val navController = rememberAnimatedNavController()
 
     NavHost(
         navController = navController,
         startDestination = Screen.HomeScreen.route
     ) {
-        composable(route = Screen.HomeScreen.route) {
-            HomeScreen(navController = navController)
+        composable(
+            Screen.HomeScreen.route,
+        ) {
+            EnterAnimation {
+                HomeScreen(navController = navController)
+            }
+
+        }
+
+        composable(route = Screen.AddCategoryScreen.route) {
+
+            EnterAnimation {
+                AddCategoryScreen(navController = navController)
+            }
+
         }
 
     }
 /*
 
-
-        composable(route = Screen.HomeScreen.route) {
-            HomeScreen(navController = navController)
-        }
 
         composable(route = Screen.DetailScreen.route + "?name={name}", //?name={name}
             arguments = listOf( // /{} /{}
@@ -54,5 +67,21 @@ fun Navigation() {
     }
 
  */
+}
+
+@ExperimentalAnimationApi
+@Composable
+fun EnterAnimation(content: @Composable () -> Unit) {
+    AnimatedVisibility(
+        visible = true,
+        enter = slideInVertically(
+            initialOffsetY = { -40 }
+        ) + expandVertically(
+            expandFrom = Alignment.Top
+        ) + fadeIn(initialAlpha = 0.3f),
+        exit = slideOutVertically() + shrinkVertically() + fadeOut(),
+        content = content,
+        initiallyVisible = false
+    )
 }
 
