@@ -4,12 +4,11 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavGraphBuilder
 
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.AddCategoryScreen
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.CategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
 
 @ExperimentalAnimationApi
@@ -82,7 +81,7 @@ fun Navigation() {
         ) {
 
 
-            AddCategoryScreen(navController = navController)
+            CategoryScreen(navController = navController)
 
         }
 

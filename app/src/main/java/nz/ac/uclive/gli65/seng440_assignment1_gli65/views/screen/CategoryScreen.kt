@@ -36,15 +36,15 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.getIconFromD
 
 @ExperimentalAnimationApi
 @Composable
-fun AddCategoryScreen(
+fun CategoryScreen(
     navController: NavController,
     categoryViewModel: CategoryViewModel = hiltViewModel()
 ) {
-    AddCategoryScreenScaffold(navController, categoryViewModel)
+    CategoryScreenScaffold(navController, categoryViewModel)
 }
 
 @Composable
-fun AddCategoryScreenScaffold(navController: NavController, categoryViewModel: CategoryViewModel) {
+fun CategoryScreenScaffold(navController: NavController, categoryViewModel: CategoryViewModel) {
 
     Scaffold(
         topBar = {
@@ -63,18 +63,18 @@ fun AddCategoryScreenScaffold(navController: NavController, categoryViewModel: C
             FloatingActionButton(onClick = {/* todo to create todo */ }) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "add", // todo description
+                    contentDescription = null,
                     tint = Color.White
                 )
             }
         },
     ) {
-        AddCategoryScreenBody(categoryViewModel)
+        CategoryScreenBody(categoryViewModel)
     }
 }
 
 @Composable
-fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel) {
+fun CategoryScreenBody(categoryViewModel: CategoryViewModel) {
 
     val categoryState = categoryViewModel.state.value
 
