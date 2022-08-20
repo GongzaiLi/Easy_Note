@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -23,10 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.BlueLight
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.LightBlue
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.Nevada
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.WhiteSmoke
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.*
 
 /**
  * Drawer Header
@@ -120,4 +117,33 @@ fun DrawerBody(
     }
 }
 
-// todo add Drawer footer
+@Composable
+fun DrawerFooter() {
+    Divider(color = LightGray, thickness = 1.dp)
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable {
+                /*
+                todo
+                 */
+            }
+            .padding(12.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(
+            painter = painterResource(id = getIconFromDrawable("ic_category_edit_24")),
+            contentDescription = null,
+            tint = DarkGray
+        )
+        Spacer(modifier = Modifier.width(40.dp))
+        Text(
+            text = stringResource(R.string.category_edit),
+            style = TextStyle(fontSize = 18.sp),
+            color = DarkGray,
+            modifier = Modifier
+                .align(Alignment.CenterVertically)
+        )
+    }
+    Divider(color = LightGray, thickness = 1.dp)
+}

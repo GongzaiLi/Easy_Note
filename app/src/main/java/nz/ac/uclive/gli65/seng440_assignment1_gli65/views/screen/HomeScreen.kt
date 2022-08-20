@@ -33,6 +33,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.BlueLight
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerBody
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerFooter
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.DrawerHeader
 
 
@@ -78,6 +79,7 @@ fun ScreenScaffold(
                     //navController.navigate(Screen.EventScreen.route + "?category=${it.id}") todo
                 }
             )
+            DrawerFooter()
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {

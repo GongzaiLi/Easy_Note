@@ -8,6 +8,8 @@ val BlueLight = Color(0xFFADD8E6)
 val Nevada = Color(0xFF666A6D) // https://www.color-meanings.com/shades-of-gray-color-names-html-hex-rgb-codes/
 val WhiteSmoke = Color(0xFFF5F5F5)
 val AppleGreen = Color(0xFFB0E400)
+val TextWhite = Color(0xFFEEEEEE)
+val LightGray = Color(0xFFD3D3D3)
 
 val RedOrange = Color(0xffffab91)
 val RedPink = Color(0xfff48fb1)
