@@ -6,4 +6,5 @@
     <string name="category_confirm_delete">Confirm Delete?</string>
     <string name="cancel_button">CANCEL</string>
     <string name="delete_button">DELETE</string>
+    <string name="delete_toast_message">Deleted successfully</string>
 </resources>

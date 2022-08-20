@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.AddCategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.CategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
 
@@ -36,7 +37,7 @@ fun Navigation() {
                     )
                 ) + fadeOut(animationSpec = tween(300))
             },
-            popEnterTransition = { initial, _ ->
+            popEnterTransition = { _, _ ->
                 slideInHorizontally(
                     initialOffsetX = { -width },
                     animationSpec = tween(
@@ -45,7 +46,7 @@ fun Navigation() {
                     )
                 ) + fadeIn(animationSpec = tween(300))
             },
-            enterTransition = { initial, _ ->
+            enterTransition = { _, _ ->
                 slideInHorizontally(
                     initialOffsetX = { -width },
                     animationSpec = tween(
@@ -59,7 +60,7 @@ fun Navigation() {
         }
 
         composable(
-            route = Screen.AddCategoryScreen.route,
+            route = Screen.CategoryScreen.route,
             enterTransition = { _, _ ->
                 slideInHorizontally(
                     initialOffsetX = { width },
@@ -69,7 +70,7 @@ fun Navigation() {
                     )
                 ) + fadeIn(animationSpec = tween(300))
             },
-            popExitTransition = { _, target ->
+            popExitTransition = { _, _ ->
                 slideOutHorizontally(
                     targetOffsetX = { width },
                     animationSpec = tween(
@@ -80,8 +81,33 @@ fun Navigation() {
             },
         ) {
 
-
             CategoryScreen(navController = navController)
+
+        }
+
+        composable(
+            route = Screen.AddCategoryScreen.route,
+            enterTransition = { _, _ ->
+                slideInHorizontally(
+                    initialOffsetX = { width },
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeIn(animationSpec = tween(300))
+            },
+            popExitTransition = { _, _ ->
+                slideOutHorizontally(
+                    targetOffsetX = { width },
+                    animationSpec = tween(
+                        durationMillis = 300,
+                        easing = FastOutSlowInEasing
+                    )
+                ) + fadeOut(animationSpec = tween(300))
+            },
+        ) {
+
+            AddCategoryScreen(navController = navController)
 
         }
 

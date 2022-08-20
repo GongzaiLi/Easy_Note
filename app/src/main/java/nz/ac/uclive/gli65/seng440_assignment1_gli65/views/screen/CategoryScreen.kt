@@ -1,5 +1,6 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
+import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,13 +12,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -31,6 +32,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.LightRed
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.TextWhite
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.ScreenTopBarRow
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.getIconFromDrawable
 
@@ -60,7 +62,9 @@ fun CategoryScreenScaffold(navController: NavController, categoryViewModel: Cate
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            FloatingActionButton(onClick = {/* todo to create todo */ }) {
+            FloatingActionButton(onClick = {
+                navController.navigate(Screen.AddCategoryScreen.route)
+            }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = null,
@@ -117,6 +121,8 @@ fun CategoryScreenBody(categoryViewModel: CategoryViewModel) {
 @Composable
 fun DeleteCategoryAlertDialog(categoryViewModel: CategoryViewModel, category: Category) {
     val showingDialog = remember { mutableStateOf(false) }
+    val context = LocalContext.current
+    val deleteMessage = stringResource(id = R.string.delete_toast_message)
     if (showingDialog.value) {
         AlertDialog(
             onDismissRequest = {
@@ -134,6 +140,11 @@ fun DeleteCategoryAlertDialog(categoryViewModel: CategoryViewModel, category: Ca
                     onClick = {
                         categoryViewModel.onEvent(CategoryEvent.DeleteCategory(category))
                         showingDialog.value = false
+                        Toast.makeText(
+                            context,
+                            deleteMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     },
                     modifier = Modifier
                         .padding(10.dp)

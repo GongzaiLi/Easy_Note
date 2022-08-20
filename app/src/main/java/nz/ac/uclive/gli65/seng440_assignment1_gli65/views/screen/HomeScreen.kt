@@ -76,7 +76,7 @@ fun HomeScreenScaffold(
                 scope.launch {
                     scaffoldState.drawerState.close()
                 }
-                navController.navigate(Screen.AddCategoryScreen.route)
+                navController.navigate(Screen.CategoryScreen.route)
             })
         },
         floatingActionButtonPosition = FabPosition.End,

@@ -46,6 +46,16 @@ class CategoryViewModel @Inject constructor(
                     screenName = event.category.title
                 )
             }
+            is CategoryEvent.PickIcon -> {
+                _state.value = state.value.copy(
+                    selectedIcon = event.iconName
+                )
+            }
+            is CategoryEvent.UpdateCategoryTitle-> {
+                _state.value = state.value.copy(
+                    categoryTitle = event.title
+                )
+            }
 //            is CategoryEvent.PickCategory -> {
 //
 //            }
@@ -73,8 +83,6 @@ class CategoryViewModel @Inject constructor(
             }
             .launchIn(viewModelScope)
     }
-
-
 
 
 }

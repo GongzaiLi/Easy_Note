@@ -9,8 +9,4 @@ data class Category(
     val title: String,
     val description: String?,
     val icon: String,
-) {
-    companion object {
-        val categoryIcon = listOf<String>("ic_all_type_24", "ic_life_24", "ic_star_24")
-    }
-}
+)

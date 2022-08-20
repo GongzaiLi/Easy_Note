@@ -12,7 +12,7 @@ class AddUseCase(
         if (category.title.isBlank()) {
             throw InvalidCategoryException("The title cannot be empty")
         }
-        repository.updateCategory(category)
+        repository.insertCategory(category)
     }
 
 }
