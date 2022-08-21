@@ -21,7 +21,7 @@ class EventViewModel @Inject constructor(
     private var getEventJob: Job? = null
 
     init {
-        getEvents()
+        getEvents(1L)
     }
 
     fun onEvent(event: EventEvent) {
@@ -41,13 +41,17 @@ class EventViewModel @Inject constructor(
                     eventUseCases.updateEvent(event.event)
                 }
             }
+            is EventEvent.GetEvents -> {
+                getEvents(event.id)
+            }
         }
     }
 
 
-    private fun getEvents() {
+    // todo many need fix
+    private fun getEvents(id: Long) {
         getEventJob?.cancel()
-        getEventJob = eventUseCases.getEvents().onEach { events ->
+        getEventJob = eventUseCases.getEvents(id).onEach { events ->
             _state.value = state.value.copy(
                 events = events
             )

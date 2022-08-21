@@ -9,5 +9,5 @@ sealed class EventEvent {
     data class DeleteEvent(val event: Event) : EventEvent()
     data class AddEvent(val event: Event) : EventEvent()
     data class UpdateEvent(val event: Event) : EventEvent()
-
+    data class GetEvents(val id: Long) : EventEvent()
 }
