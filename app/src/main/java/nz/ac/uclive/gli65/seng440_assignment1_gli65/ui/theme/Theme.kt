@@ -9,13 +9,23 @@ import androidx.compose.ui.graphics.Color
 
 @SuppressLint("ConflictingOnColor") // todo
 private val LightColorPalette = lightColors(
-    primary = Color.White,
-    background = Color.White,
-    onBackground = Color.White,
-    surface = Color.White,
-    onSurface = Color.White,
+    primary = LightGray,
+    background = LightGray,
+    onBackground = LightGray,
+    surface = LightGray,
+    onSurface = DarkGray,
     //primaryVariant = Color.Blue,
 )
+
+/*
+private val DarkColorPalette = darkColors(
+    primary = Color.White,
+    background = DarkGray,
+    onBackground = Color.White,
+    surface = LightBlue,
+    onSurface = DarkGray
+)
+ */
 
 @Composable
 fun Seng440_assignment1_gli65Theme(darkTheme: Boolean = true, content: @Composable() () -> Unit) {

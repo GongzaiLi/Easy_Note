@@ -8,7 +8,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
 @Dao
 interface EventDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE) // todo not sure
     suspend fun insert(event: Event): Long
 
     @Update

@@ -26,6 +26,8 @@ import kotlinx.coroutines.launch
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.*
 
@@ -41,15 +43,18 @@ fun HomeScreen(
 @Composable
 fun HomeScreenScaffold(
     navController: NavController,
-    categoryViewModel: CategoryViewModel = hiltViewModel()
+    categoryViewModel: CategoryViewModel = hiltViewModel<CategoryViewModel>(),
+    eventViewModel: EventViewModel = hiltViewModel<EventViewModel>()
 ) {
 
     val categoryState = categoryViewModel.state.value
+    val eventState = eventViewModel.state.value
 
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
     categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
+    eventViewModel.onEvent(EventEvent.GetEvents(categoryState.pickCategory?.id))
 
     val screenName: String = categoryState.screenName
     Scaffold(
@@ -70,8 +75,6 @@ fun HomeScreenScaffold(
         drawerShape = customShape(),
         drawerContent = {
             DrawerHeader()
-
-
             DrawerBody(
                 categories = categoryState.categories,
                 onClick = {
@@ -94,7 +97,7 @@ fun HomeScreenScaffold(
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            FloatingActionButton(onClick = {/* todo to create todo */ }) {
+            FloatingActionButton(onClick = { navController.navigate(Screen.AddEventScreen.route + "?categoryId=${categoryState.pickCategory?.id}") }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "add", // todo description
@@ -103,11 +106,7 @@ fun HomeScreenScaffold(
             }
         },
     ) {
-        // Screen content
-        //Test(navController = navController) // todo
-        //navigation
-
-        //ScreenBody(events = events)
+        EventBody(events = eventState.events, navController = navController)
     }
 }
 
