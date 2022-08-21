@@ -46,7 +46,7 @@ class EventRepositoryImpl(
         return dao.findByCategoryId(categoryId)
     }
 
-    override fun getCountEventByCategoryId(categoryId: Long): LiveData<Int> {
+    override fun getCountEventByCategoryId(categoryId: Long): Flow<Int> {
         return dao.getCountByCategoryId(categoryId)
     }
 

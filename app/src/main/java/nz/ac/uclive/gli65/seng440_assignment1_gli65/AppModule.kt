@@ -14,6 +14,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.impl.Event
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryUseCases
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.AddUseCase
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.DeleteUseCase
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.GetEventCount
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.GetUseCase
 import javax.inject.Singleton
 
@@ -44,11 +45,15 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUseCases(categoryRepository: ICategoryRepository): CategoryUseCases {
+    fun provideUseCases(
+        categoryRepository: ICategoryRepository,
+        eventRepository: IEventRepository
+    ): CategoryUseCases {
         return CategoryUseCases(
             getUseCase = GetUseCase(categoryRepository),
             deleteUseCase = DeleteUseCase(categoryRepository),
             addUseCase = AddUseCase(categoryRepository),
+            getEventCount = GetEventCount(eventRepository),
         )
     }
 

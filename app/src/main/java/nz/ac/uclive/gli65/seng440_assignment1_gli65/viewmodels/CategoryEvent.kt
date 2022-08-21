@@ -16,7 +16,9 @@ sealed class CategoryEvent {
 
     data class UpdateCategoryTitle(val title: String): CategoryEvent()
 
-    //object GetCategories : CategoryEvent()
+    //data class GetEventCount(val category: Category): CategoryEvent()
+
+    object UpdateEventCount : CategoryEvent()
 
     // todo more event
 }

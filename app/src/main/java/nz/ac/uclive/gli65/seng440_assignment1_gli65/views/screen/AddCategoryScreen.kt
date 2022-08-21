@@ -1,5 +1,6 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
+import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -11,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -26,6 +28,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.ScreenTopBarRow
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.getIconFromDrawable
+
 // todo Ui
 @ExperimentalAnimationApi
 @Composable
@@ -64,6 +67,8 @@ fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel, navController: N
     // todo ui
 
     val categoryState = categoryViewModel.state.value
+    val context = LocalContext.current
+    val createMessage = "Please input Category Title" // todo message
 
 
     Column {
@@ -105,16 +110,20 @@ fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel, navController: N
         ) {
             Button(onClick = {
                 // todo fix ui and check title is null or not
-                categoryViewModel.onEvent(
-                    CategoryEvent.AddCategory(
-                        Category(
-                            title = categoryState.categoryTitle,
-                            description = "some", // todo here
-                            icon = categoryState.selectedIcon
+                if (categoryState.categoryTitle.isNotBlank()) {
+                    categoryViewModel.onEvent(
+                        CategoryEvent.AddCategory(
+                            Category(
+                                title = categoryState.categoryTitle,
+                                description = "some", // todo here
+                                icon = categoryState.selectedIcon
+                            )
                         )
                     )
-                )
-                navController.navigateUp()
+                    navController.navigateUp()
+                }
+                Toast.makeText(context, createMessage, Toast.LENGTH_LONG).show()
+
 
                 //Toast.makeText(applicationContext, "You clicked the Button.", Toast.LENGTH_LONG).show()
             }) {

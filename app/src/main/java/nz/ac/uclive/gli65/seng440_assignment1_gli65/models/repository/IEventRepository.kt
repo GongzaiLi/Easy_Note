@@ -21,6 +21,6 @@ interface IEventRepository {
 
     fun getEventByCategoryId(categoryId: Long): Flow<List<Event>>
 
-    fun getCountEventByCategoryId(categoryId: Long): LiveData<Int>
+    fun getCountEventByCategoryId(categoryId: Long): Flow<Int>
 
 }

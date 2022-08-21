@@ -2,11 +2,16 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
 import android.content.res.Configuration
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
@@ -45,6 +50,8 @@ fun HomeScreenScaffold(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
+    categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
+
     val screenName: String = categoryState.screenName
     Scaffold(
         scaffoldState = scaffoldState,
@@ -55,6 +62,7 @@ fun HomeScreenScaffold(
                 onClick = {
                     scope.launch {
                         scaffoldState.drawerState.open()
+                        categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
                     }
                 }
             )
@@ -62,6 +70,7 @@ fun HomeScreenScaffold(
         drawerShape = customShape(),
         drawerContent = {
             DrawerHeader()
+
             DrawerBody(
                 categories = categoryState.categories,
                 onClick = {
@@ -78,6 +87,8 @@ fun HomeScreenScaffold(
                 }
                 navController.navigate(Screen.CategoryScreen.route)
             })
+
+
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
