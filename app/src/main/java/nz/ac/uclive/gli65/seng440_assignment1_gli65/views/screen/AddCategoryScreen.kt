@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -64,7 +63,6 @@ fun AddCategoryScreenScaffold(
 
 @Composable
 fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel, navController: NavHostController) {
-    // todo ui
 
     val categoryState = categoryViewModel.state.value
     val context = LocalContext.current
@@ -121,10 +119,9 @@ fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel, navController: N
                         )
                     )
                     navController.navigateUp()
+                } else {
+                    Toast.makeText(context, createMessage, Toast.LENGTH_LONG).show()
                 }
-                Toast.makeText(context, createMessage, Toast.LENGTH_LONG).show()
-
-
                 //Toast.makeText(applicationContext, "You clicked the Button.", Toast.LENGTH_LONG).show()
             }) {
                 Text("Submit Request")

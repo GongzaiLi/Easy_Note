@@ -12,5 +12,5 @@ data class Category(
     val icon: String,
 ) {
     @Ignore
-    var eventNumber: Int = 100
+    var eventNumber: Int = 0
 }

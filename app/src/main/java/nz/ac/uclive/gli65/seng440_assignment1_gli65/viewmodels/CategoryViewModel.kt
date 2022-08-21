@@ -5,14 +5,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.awaitAll
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import javax.inject.Inject
 
@@ -28,7 +22,7 @@ class CategoryViewModel @Inject constructor(
     val state: State<CategoryState> = _state
 
     init {
-        getCetCategories()
+        getCategories()
         //test()
     }
 
@@ -83,53 +77,39 @@ class CategoryViewModel @Inject constructor(
         }
     }
 
-    private fun getCetCategories() {
+    private fun getCategories() {
         getCategoryJob?.cancel()
 
-        viewModelScope.launch {
-            categoryUseCases.getUseCase().collectLatest { categories ->
-                delay(100L) //
-                categories.map { category ->
-                    categoryUseCases.getEventCount(category).onEach {
-                        category.eventNumber = it
-                    }.launchIn(viewModelScope)
+        // io
+        viewModelScope.launch {  // https://www.youtube.com/watch?v=6dRwaXH2cYA
+            withContext(Dispatchers.IO) {
+                categoryUseCases.getUseCase().collectLatest { categories ->
+
+                    val newCategories = categories.map { category ->
+                        val job = async {
+                            categoryUseCases.getEventCount(category)
+                        }
+                        category.eventNumber = job.await().first()
+                        category // return
+                    }
+
+                    _state.value = state.value.copy(
+                        categories = newCategories,
+                        pickCategory = newCategories[0],
+                        screenName = newCategories[0].title
+                    )
                 }
-                _state.value = state.value.copy(
-                    categories = categories,
-                    pickCategory = categories[0],
-                    screenName = categories[0].title
-                )
             }
-
         }
-
-//        getCategoryJob = categoryUseCases.getUseCase()
-//            .onEach { categories ->
-//                delay(2000L) // https://www.youtube.com/watch?v=6dRwaXH2cYA
-//
-//                categories.map { category ->
-//                    categoryUseCases.getEventCount(category).onEach {
-//                        category.eventNumber = it
-//                    }.launchIn(viewModelScope)
-//                }
-//
-//                _state.value = state.value.copy(
-//                    categories = categories,
-//                    pickCategory = categories[0],
-//                    screenName = categories[0].title
-//                )
-//            }
-//            .launchIn(viewModelScope)
+        //onFailure
     }
-
-    private fun test() {
-//        getCategoryCountJob?.cancel()
-//        _state.value.categories.map { category ->
-//            getCategoryCountJob = categoryUseCases.getEventCount(category).onEach {
-//                category.eventNumber = it
-//            }.launchIn(viewModelScope)
-//        }
-    }
-
-
 }
+
+//private fun test() {
+////        getCategoryCountJob?.cancel()
+////        _state.value.categories.map { category ->
+////            getCategoryCountJob = categoryUseCases.getEventCount(category).onEach {
+////                category.eventNumber = it
+////            }.launchIn(viewModelScope)
+////        }
+//}

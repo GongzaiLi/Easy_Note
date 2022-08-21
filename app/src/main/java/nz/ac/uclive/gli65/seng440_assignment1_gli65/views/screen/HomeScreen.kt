@@ -2,10 +2,9 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
 import android.content.res.Configuration
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -54,6 +53,7 @@ fun HomeScreenScaffold(
 
     val screenName: String = categoryState.screenName
     Scaffold(
+        modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
         topBar = {
             ScreenTopBarRow(
@@ -71,6 +71,7 @@ fun HomeScreenScaffold(
         drawerContent = {
             DrawerHeader()
 
+
             DrawerBody(
                 categories = categoryState.categories,
                 onClick = {
@@ -79,14 +80,15 @@ fun HomeScreenScaffold(
                         scaffoldState.drawerState.close()
                     }
                     //navController.navigate(Screen.EventScreen.route + "?category=${it.id}") todo
+                },
+                onFooterClick = {
+                    scope.launch {
+                        scaffoldState.drawerState.close()
+                    }
+                    navController.navigate(Screen.CategoryScreen.route)
                 }
             )
-            DrawerFooter(onClick = {
-                scope.launch {
-                    scaffoldState.drawerState.close()
-                }
-                navController.navigate(Screen.CategoryScreen.route)
-            })
+            //DrawerFooter(onClick = )
 
 
         },

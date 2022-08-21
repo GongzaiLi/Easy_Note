@@ -68,10 +68,12 @@ fun DrawerHeader() {
 @Composable
 fun DrawerBody(
     categories: List<Category>,
-    onClick: (Category) -> Unit // todo change when
+    onClick: (Category) -> Unit, // todo change when
+    onFooterClick: () -> Unit
 ) {
     LazyColumn(modifier = Modifier
         .background(LightBlue)) {// 是compose 对 RecyclerView 的回应
+
         items(categories) { category ->
             Row(
                 modifier = Modifier
@@ -118,6 +120,10 @@ fun DrawerBody(
 
             }
         }
+
+        item{
+            DrawerFooter(onFooterClick)
+        }
     }
 }
 
@@ -126,7 +132,6 @@ fun DrawerFooter(onClick: () -> Unit) {
     Divider(color = LightGray, thickness = 1.dp)
     Row(
         modifier = Modifier
-            .fillMaxWidth()
             .clickable {
                 onClick()
             }
