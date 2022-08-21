@@ -12,6 +12,11 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.IEventRepo
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.impl.CategoryRepositoryImpl
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.impl.EventRepositoryImpl
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryUseCases
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventUseCases
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.use_case.AddEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.use_case.DeleteEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.use_case.GetEvents
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.use_case.UpdateEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.AddUseCase
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.DeleteUseCase
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.GetEventCount
@@ -45,7 +50,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideUseCases(
+    fun provideCategoryUseCases(
         categoryRepository: ICategoryRepository,
         eventRepository: IEventRepository
     ): CategoryUseCases {
@@ -54,6 +59,19 @@ object AppModule {
             deleteUseCase = DeleteUseCase(categoryRepository),
             addUseCase = AddUseCase(categoryRepository),
             getEventCount = GetEventCount(eventRepository),
+        )
+    }
+
+    @Provides
+    @Singleton
+    fun provideEventUseCases(
+        eventRepository: IEventRepository
+    ): EventUseCases {
+        return EventUseCases(
+            getEvents = GetEvents(eventRepository),
+            deleteEvent = DeleteEvent(eventRepository),
+            addEvent = AddEvent(eventRepository),
+            updateEvent = UpdateEvent(eventRepository),
         )
     }
 
