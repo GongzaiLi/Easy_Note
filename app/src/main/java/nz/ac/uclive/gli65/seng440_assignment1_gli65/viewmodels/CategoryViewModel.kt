@@ -57,9 +57,10 @@ class CategoryViewModel @Inject constructor(
                     categoryTitle = event.title
                 )
             }
-//            is CategoryEvent.UpdateEventCount -> {
-//                test()
-//            }
+            is CategoryEvent.UpdateEventCount -> {
+                //getCategories()
+                updateCategoryNum()
+            }
 
 
 //            is CategoryEvent.PickCategory -> {
@@ -82,34 +83,48 @@ class CategoryViewModel @Inject constructor(
 
         // io
         viewModelScope.launch {  // https://www.youtube.com/watch?v=6dRwaXH2cYA
-            withContext(Dispatchers.IO) {
-                categoryUseCases.getUseCase().collectLatest { categories ->
 
-                    val newCategories = categories.map { category ->
-                        val job = async {
-                            categoryUseCases.getEventCount(category)
-                        }
-                        category.eventNumber = job.await().first()
-                        category // return
+            categoryUseCases.getUseCase().collectLatest { categories ->
+
+                val newCategories = categories.map { category ->
+                    val job = async {
+                        categoryUseCases.getEventCount(category)
                     }
-
-                    _state.value = state.value.copy(
-                        categories = newCategories,
-                        pickCategory = newCategories[0],
-                        screenName = newCategories[0].title
-                    )
+                    category.eventNumber = job.await().first()
+                    category // return
                 }
+
+                _state.value = state.value.copy(
+                    categories = newCategories,
+                    pickCategory = newCategories[0],
+                    screenName = newCategories[0].title
+                )
             }
+
         }
         //onFailure
     }
+
+    private fun updateCategoryNum() {
+
+        viewModelScope.launch {  // https://www.youtube.com/watch?v=6dRwaXH2cYA
+
+            val newCategories = _state.value.categories.map { category ->
+                val job = async {
+                    categoryUseCases.getEventCount(category)
+                }
+                category.eventNumber = job.await().first()
+                category // return
+            }
+
+            _state.value = state.value.copy(
+                categories = newCategories,
+            )
+
+
+        }
+
+    }
 }
 
-//private fun test() {
-////        getCategoryCountJob?.cancel()
-////        _state.value.categories.map { category ->
-////            getCategoryCountJob = categoryUseCases.getEventCount(category).onEach {
-////                category.eventNumber = it
-////            }.launchIn(viewModelScope)
-////        }
-//}
+

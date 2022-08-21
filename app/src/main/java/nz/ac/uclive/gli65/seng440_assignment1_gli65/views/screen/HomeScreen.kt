@@ -66,8 +66,8 @@ fun HomeScreenScaffold(
                 stringResource(R.string.main_screen_name, screenName),
                 onClick = {
                     scope.launch {
-                        scaffoldState.drawerState.open()
                         categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
+                        scaffoldState.drawerState.open()
                     }
                 }
             )
