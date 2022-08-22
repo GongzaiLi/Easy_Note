@@ -1,5 +1,6 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component
 
+import android.content.Intent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,11 +10,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Share
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -22,14 +25,17 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.DarkGray
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.LightRed
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.TextWhite
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
+import org.w3c.dom.Text
 import java.time.LocalDateTime
 import java.time.format.TextStyle
 import java.util.*
+import javax.security.auth.Subject
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -126,11 +132,11 @@ fun Card(event: Event, navController: NavController) {
                     text = getDateTime(getLocalDateTime(event.timestamp)),
                     style = MaterialTheme.typography.body1,
                     color = DarkGray
-                ) //
+                )
             }
-
         }
-        // todo set up color
+        ShareButton(event.title, event.description ?: "")
+
     }
 }
 
@@ -154,4 +160,29 @@ fun getLocalDateTime(dateString: String): LocalDateTime {
 
 fun toDateString(date: LocalDateTime): String {
     return date.toString()
+}
+
+@Composable
+fun ShareButton(subject: String, text: String) {
+    val sendIntent: Intent = Intent().apply {
+        action = Intent.ACTION_SEND
+        putExtra(Intent.EXTRA_SUBJECT, subject)
+        putExtra(Intent.EXTRA_TEXT, text)
+        type = "text/plain"
+    }
+    val shareIntent = Intent.createChooser(sendIntent, null) //title or some
+    val context = LocalContext.current
+
+    IconButton(
+        onClick = {
+            context.startActivity(shareIntent)
+        },
+    ) {
+        Icon(
+            imageVector = Icons.Default.Share,
+            contentDescription = null,
+            tint = DarkGray,
+        )
+    }
+
 }
