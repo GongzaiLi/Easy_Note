@@ -106,7 +106,7 @@ fun HomeScreenScaffold(
             }
         },
     ) {
-        EventBody(events = eventState.events, navController = navController)
+        EventBody(events = eventState.events, navController = navController, eventViewModel)
     }
 }
 

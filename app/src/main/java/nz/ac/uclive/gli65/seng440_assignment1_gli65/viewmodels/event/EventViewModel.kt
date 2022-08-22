@@ -66,7 +66,8 @@ class EventViewModel @Inject constructor(
                         )
                         _eventDescription.value = eventDescription.value.copy(
                             text = it.description ?: "",
-                            isHintVisible = false
+                            hint = if (it.description == null || it.description.isBlank()) "Enter some description ..." else "",
+                            isHintVisible = it.description == null || it.description.isBlank()
                         )
                         _state.value = state.value.copy(
                             selectedColor = it.color

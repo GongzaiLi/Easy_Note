@@ -85,20 +85,21 @@ class CategoryViewModel @Inject constructor(
         viewModelScope.launch {  // https://www.youtube.com/watch?v=6dRwaXH2cYA
 
             categoryUseCases.getUseCase().collectLatest { categories ->
-
-                val newCategories = categories.map { category ->
-                    val job = async {
-                        categoryUseCases.getEventCount(category)
+                withContext(Dispatchers.IO) {
+                    val newCategories = categories.map { category ->
+                        val job = async {
+                            categoryUseCases.getEventCount(category)
+                        }
+                        category.eventNumber = job.await().first()
+                        category // return
                     }
-                    category.eventNumber = job.await().first()
-                    category // return
-                }
 
-                _state.value = state.value.copy(
-                    categories = newCategories,
-                    pickCategory = newCategories[0],
-                    screenName = newCategories[0].title
-                )
+                    _state.value = state.value.copy(
+                        categories = newCategories,
+                        pickCategory = newCategories[0],
+                        screenName = newCategories[0].title
+                    )
+                }
             }
 
         }

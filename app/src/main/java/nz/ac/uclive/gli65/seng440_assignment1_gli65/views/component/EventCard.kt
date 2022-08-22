@@ -1,14 +1,16 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,26 +24,75 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.DarkGray
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.LightRed
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.TextWhite
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import java.time.LocalDateTime
 import java.time.format.TextStyle
 import java.util.*
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EventBody(
     events: List<Event>,
-    navController: NavController
+    navController: NavController,
+    eventViewModel: EventViewModel
 ) {
-    LazyColumn {// 是compose 对 RecyclerView 的回应
-        items(events) { event ->
-            Card(event, navController)
+    LazyColumn {
+        itemsIndexed(
+            items = events, key = { _, listItem -> listItem.hashCode() }
+        ) { index, event ->
+            val state = rememberDismissState(
+                confirmStateChange = {
+                    if (it == DismissValue.DismissedToStart) {
+                        eventViewModel.onEvent(EventEvent.DeleteEvent(event))
+                    }
+                    true
+                }
+            )
+            SwipeToDismiss(
+                state = state,
+                background = {
+                    val color = when (state.dismissDirection) {
+                        DismissDirection.StartToEnd -> Color.Transparent
+                        DismissDirection.EndToStart -> LightRed
+                        null -> Color.Transparent
+                    }
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(color = color)
+                            .padding(10.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "Delete",
+                            tint = Color.White,
+                            modifier = Modifier.align(
+                                Alignment.CenterEnd
+                            )
+                        )
+                    }
+                },
+                dismissContent = {
+                    Card(event, navController)
+                },
+                directions = setOf(DismissDirection.EndToStart)
+            )
+            Divider()
+
         }
     }
+
+//    LazyColumn {// 是compose 对 RecyclerView 的回应
+//        items(events) { event ->
+//            Card(event, navController)
+//        }
+//    }
 }
 
 @Composable
-fun Card(event: Event, navController: NavController) { // todo click function
+fun Card(event: Event, navController: NavController) {
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
