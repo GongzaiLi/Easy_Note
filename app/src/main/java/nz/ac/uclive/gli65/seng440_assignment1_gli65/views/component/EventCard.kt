@@ -22,6 +22,8 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.DarkGray
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.LightRed
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
@@ -34,7 +36,8 @@ import java.util.*
 fun EventBody(
     events: List<Event>,
     navController: NavController,
-    eventViewModel: EventViewModel
+    eventViewModel: EventViewModel,
+    categoryViewModel: CategoryViewModel
 ) {
     LazyColumn {
         itemsIndexed(
@@ -44,6 +47,7 @@ fun EventBody(
                 confirmStateChange = {
                     if (it == DismissValue.DismissedToStart) {
                         eventViewModel.onEvent(EventEvent.DeleteEvent(event))
+                        categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
                     }
                     true
                 }

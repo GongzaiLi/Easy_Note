@@ -26,6 +26,8 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.EventTextField
@@ -37,7 +39,8 @@ fun AddEventScreen(
     navController: NavController,
     eventColor: Int,
     categoryId: Long,
-    eventViewModel: EventViewModel = hiltViewModel()
+    eventViewModel: EventViewModel = hiltViewModel(),
+    categoryViewModel: CategoryViewModel = hiltViewModel<CategoryViewModel>(),
 ) {
     val eventState = eventViewModel.state.value
     val eventTitleState = eventViewModel.eventTitle.value
@@ -79,6 +82,8 @@ fun AddEventScreen(
                         categoryId
                     )
                 )// todo time picker and
+
+                categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
             }) {
                 Icon(
                     imageVector = Icons.Default.Save,

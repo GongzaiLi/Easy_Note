@@ -55,6 +55,7 @@ fun HomeScreenScaffold(
 
 
     eventViewModel.onEvent(EventEvent.GetEvents(categoryState.pickCategory?.id))
+    categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
 
     val screenName: String = categoryState.screenName
     Scaffold(
@@ -67,6 +68,7 @@ fun HomeScreenScaffold(
                 onClick = {
                     scope.launch {
                         categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
+
                         scaffoldState.drawerState.open()
                     }
                 }
@@ -97,7 +99,9 @@ fun HomeScreenScaffold(
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            FloatingActionButton(onClick = { navController.navigate(Screen.AddEventScreen.route + "?categoryId=${categoryState.pickCategory?.id}") }) {
+            FloatingActionButton(onClick = {
+                navController.navigate(Screen.AddEventScreen.route + "?categoryId=${categoryState.pickCategory?.id}")
+            }) {
                 Icon(
                     imageVector = Icons.Default.Add,
                     contentDescription = "add", // todo description
@@ -106,7 +110,12 @@ fun HomeScreenScaffold(
             }
         },
     ) {
-        EventBody(events = eventState.events, navController = navController, eventViewModel)
+        EventBody(
+            events = eventState.events,
+            navController = navController,
+            eventViewModel,
+            categoryViewModel
+        )
     }
 }
 
