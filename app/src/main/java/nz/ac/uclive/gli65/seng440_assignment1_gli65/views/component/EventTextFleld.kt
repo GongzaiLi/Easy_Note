@@ -39,7 +39,7 @@ fun EventTextField(
                 }
         )
         if (isHintVisible) {
-            Text(text = hint, style = textStyle, color = DarkGray)
+            Text(text = hint, style = textStyle, color = Color.Black)
         }
 
     }

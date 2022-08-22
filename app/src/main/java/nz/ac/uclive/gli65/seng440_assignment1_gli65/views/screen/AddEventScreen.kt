@@ -113,7 +113,7 @@ fun AddEventScreen(
                             .background(color)
                             .border(
                                 width = 3.dp,
-                                color = if (eventColor == colorInt) {
+                                color = if (eventState.selectedColor == colorInt) {
                                     Color.Black
                                 } else Color.Transparent,
                                 shape = RoundedCornerShape(10.dp)

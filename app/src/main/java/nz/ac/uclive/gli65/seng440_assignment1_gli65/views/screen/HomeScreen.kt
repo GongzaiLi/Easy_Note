@@ -53,7 +53,7 @@ fun HomeScreenScaffold(
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
 
-    categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
+
     eventViewModel.onEvent(EventEvent.GetEvents(categoryState.pickCategory?.id))
 
     val screenName: String = categoryState.screenName

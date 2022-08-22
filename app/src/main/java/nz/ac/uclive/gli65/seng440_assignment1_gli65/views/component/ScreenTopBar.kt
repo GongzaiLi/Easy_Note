@@ -46,3 +46,36 @@ fun ScreenTopBarRow(
         }
     }
 }
+
+
+@Composable
+fun HomeScreenTopBarRow(
+    icon: String,
+    screenName: String,
+    onClick: () -> Unit
+) {
+    TopAppBar(
+        backgroundColor = BlueLight
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            IconButton(
+                onClick = {
+                    onClick()
+                }) {
+                Icon(
+                    painterResource(id = getIconFromDrawable(icon)),
+                    contentDescription = null,
+                    tint = Color.White
+                )
+            }
+            Spacer(modifier = Modifier.width(20.dp))
+            Text(
+                text = screenName,
+                color = Color.White,
+                textAlign = TextAlign.Center,
+                fontSize = 20.sp
+            )
+
+        }
+    }
+}

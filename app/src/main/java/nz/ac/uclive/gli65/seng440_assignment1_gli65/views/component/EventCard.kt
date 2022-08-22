@@ -1,11 +1,9 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -105,7 +103,7 @@ fun Card(event: Event, navController: NavController) {
             .fillMaxWidth()
             .clickable {
                 navController.navigate(Screen.AddEventScreen.route + "?eventId=${event.id}&eventColor=${event.color}")
-            } // todo click function
+            }
     ) {
         Column {
             Text(text = event.title, style = MaterialTheme.typography.h2, color = DarkGray)

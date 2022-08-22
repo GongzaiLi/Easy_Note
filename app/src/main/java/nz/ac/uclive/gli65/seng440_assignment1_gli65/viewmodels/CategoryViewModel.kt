@@ -35,11 +35,13 @@ class CategoryViewModel @Inject constructor(
                 viewModelScope.launch {
                     categoryUseCases.deleteUseCase(event.category)
                 }
+                updateCategoryNum()
             }
             is CategoryEvent.AddCategory -> {
                 viewModelScope.launch {
                     categoryUseCases.addUseCase(event.category)
                 }
+                updateCategoryNum()
             }
             is CategoryEvent.PickCategory -> {
                 _state.value = state.value.copy(
