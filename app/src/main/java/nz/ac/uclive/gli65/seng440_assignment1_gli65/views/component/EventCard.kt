@@ -111,7 +111,7 @@ fun Card(event: Event, navController: NavController) {
 
 
             Row(verticalAlignment = Alignment.CenterVertically) {
-                val name = "ic_time_24" // todo fix
+                val name = "ic_time_24" // time icon name
                 Icon(
                     painter = painterResource(id = getIconFromDrawable(name)),
                     contentDescription = null,
@@ -147,10 +147,6 @@ fun formatNumber(number: Int): String = if (number < 10) "0$number" else "$numbe
 
 fun getLocalDateTime(dateString: String): LocalDateTime {
     return LocalDateTime.parse(dateString)
-}
-
-fun toDateString(date: LocalDateTime): String {
-    return date.toString()
 }
 
 @Composable

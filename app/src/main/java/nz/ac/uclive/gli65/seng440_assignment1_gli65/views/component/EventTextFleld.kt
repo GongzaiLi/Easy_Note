@@ -1,6 +1,5 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.BasicTextField
@@ -11,10 +10,8 @@ import androidx.compose.ui.focus.FocusState
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.DarkGray
-import kotlin.math.sin
 
-// todo
+
 @Composable
 fun EventTextField(
     text: String,
@@ -23,7 +20,7 @@ fun EventTextField(
     isHintVisible: Boolean = true,
     onValueChange: (String) -> Unit,
     textStyle: TextStyle = TextStyle(),
-    singleLine: Boolean = false, // todo not sure
+    singleLine: Boolean = false,
     onFocusChange: (FocusState) -> Unit
 ) {
     Box(modifier = modifier) {

@@ -83,7 +83,6 @@ fun HomeScreenScaffold(
                     scope.launch {
                         scaffoldState.drawerState.close()
                     }
-                    //navController.navigate(Screen.EventScreen.route + "?category=${it.id}") todo
                 },
                 onFooterClick = {
                     scope.launch {
@@ -103,7 +102,7 @@ fun HomeScreenScaffold(
             }) {
                 Icon(
                     imageVector = Icons.Default.Add,
-                    contentDescription = "add", // todo description
+                    contentDescription = null,
                     tint = Color.White
                 )
             }
@@ -133,7 +132,7 @@ fun customShape() = object : Shape {
 
         val right = when (configuration.orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> {
-                size.width * 9f / 10f // todo
+                size.width * 9f / 10f
             }
             else -> {
                 size.width * 9f / 10f
