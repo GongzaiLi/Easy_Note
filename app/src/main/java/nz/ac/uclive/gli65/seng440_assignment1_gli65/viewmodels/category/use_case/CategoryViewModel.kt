@@ -1,4 +1,4 @@
-package nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels
+package nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import javax.inject.Inject
 
 @HiltViewModel

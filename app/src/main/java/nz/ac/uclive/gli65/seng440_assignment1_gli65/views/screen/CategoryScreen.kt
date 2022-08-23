@@ -31,8 +31,8 @@ import androidx.navigation.NavController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.*
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.ScreenTopBarRow
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.getIconFromDrawable
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.titleNotification

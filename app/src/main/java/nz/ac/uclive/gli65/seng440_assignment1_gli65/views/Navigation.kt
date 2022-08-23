@@ -3,6 +3,7 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views
 import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
@@ -14,6 +15,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.AddEventScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.CategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
 fun Navigation() {

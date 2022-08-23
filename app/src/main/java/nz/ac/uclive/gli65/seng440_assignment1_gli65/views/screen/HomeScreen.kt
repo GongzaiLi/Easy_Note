@@ -2,8 +2,6 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
 import android.content.res.Configuration
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.gestures.ScrollableState
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -24,13 +22,14 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.*
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
 @Composable
 fun HomeScreen(
@@ -39,7 +38,7 @@ fun HomeScreen(
     HomeScreenScaffold(navController = navController)
 }
 
-
+@ExperimentalMaterialApi
 @Composable
 fun HomeScreenScaffold(
     navController: NavController,

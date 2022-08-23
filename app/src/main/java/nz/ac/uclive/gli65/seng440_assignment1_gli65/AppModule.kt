@@ -11,13 +11,13 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.ICategoryR
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.IEventRepository
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.impl.CategoryRepositoryImpl
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.impl.EventRepositoryImpl
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryUseCases
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryUseCases
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventUseCases
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.use_case.*
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.AddUseCase
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.DeleteUseCase
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.GetEventCount
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case.GetUseCase
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.AddUseCase
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.DeleteUseCase
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.GetEventCount
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.GetUseCase
 import javax.inject.Singleton
 
 @Module

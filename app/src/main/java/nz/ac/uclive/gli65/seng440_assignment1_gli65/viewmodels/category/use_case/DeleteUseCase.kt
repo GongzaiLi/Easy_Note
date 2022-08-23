@@ -1,4 +1,4 @@
-package nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.use_case
+package nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case
 
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.ICategoryRepository
