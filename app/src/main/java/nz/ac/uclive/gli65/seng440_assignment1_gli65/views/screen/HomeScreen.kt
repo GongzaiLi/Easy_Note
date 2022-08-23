@@ -65,9 +65,9 @@ fun HomeScreenScaffold(
                 "ic_menu_24",
                 stringResource(R.string.main_screen_name, screenName),
                 onClick = {
-                    scope.launch {
-                        categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
+                    categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
 
+                    scope.launch {
                         scaffoldState.drawerState.open()
                     }
                 }

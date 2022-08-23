@@ -19,6 +19,7 @@ class CategoryViewModel @Inject constructor(
 
     init {
         getCategories()
+        updateCategoryNum()
     }
 
     private var getCategoryJob: Job? = null
@@ -56,7 +57,6 @@ class CategoryViewModel @Inject constructor(
                 )
             }
             is CategoryEvent.UpdateEventCount -> {
-                //getCategories()
                 updateCategoryNum()
             }
         }

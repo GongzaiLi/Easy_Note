@@ -15,7 +15,7 @@ val Typography = Typography(
         fontSize = 22.sp
     ),
     body1 = TextStyle(
-        color = AquaBlue,
+        color = DarkGray,
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp

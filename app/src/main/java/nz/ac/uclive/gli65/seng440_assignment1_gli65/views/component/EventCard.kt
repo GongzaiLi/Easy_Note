@@ -88,12 +88,6 @@ fun EventBody(
 
         }
     }
-
-//    LazyColumn {// 是compose 对 RecyclerView 的回应
-//        items(events) { event ->
-//            Card(event, navController)
-//        }
-//    }
 }
 
 @Composable

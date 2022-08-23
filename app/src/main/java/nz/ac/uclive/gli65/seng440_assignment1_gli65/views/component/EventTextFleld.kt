@@ -36,7 +36,7 @@ fun EventTextField(
                 .fillMaxWidth()
                 .onFocusChanged {
                     onFocusChange(it)
-                }
+                },
         )
         if (isHintVisible) {
             Text(text = hint, style = textStyle, color = Color.Black)

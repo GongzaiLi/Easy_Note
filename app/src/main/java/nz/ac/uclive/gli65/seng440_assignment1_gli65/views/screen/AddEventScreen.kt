@@ -2,6 +2,8 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.Animatable
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.AnimationVector4D
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -45,20 +47,12 @@ fun AddEventScreen(
 ) {
     val eventState = eventViewModel.state.value
     val eventTitleState = eventViewModel.eventTitle.value
-    val eventDescriptionState = eventViewModel.eventDescription.value
+
     val context = LocalContext.current
 
-
-    val backGroundAnimation = remember {
-        Animatable(
-            Color(if (eventColor != -1) eventColor else eventState.selectedColor)
-        )
-    }
-
     val scaffoldState = rememberScaffoldState()
-    val scope = rememberCoroutineScope()
 
-    // todo fix and refactor
+
     LaunchedEffect(key1 = true) {
         eventViewModel.eventFlow.collectLatest { event ->
             when (event) {
@@ -73,6 +67,12 @@ fun AddEventScreen(
                 }
             }
         }
+    }
+
+    val backGroundAnimation = remember {
+        Animatable(
+            Color(if (eventColor != -1) eventColor else eventState.selectedColor)
+        )
     }
 
     Scaffold(
@@ -90,8 +90,6 @@ fun AddEventScreen(
                     )
                     categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
                 }
-
-
             }) {
                 Icon(
                     imageVector = Icons.Default.Save,
@@ -103,85 +101,104 @@ fun AddEventScreen(
         },
         scaffoldState = scaffoldState
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxSize()
                 .background(backGroundAnimation.value)
                 .padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                eventState.colors.forEach { color ->
-                    val colorInt = color.toArgb()
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .shadow(15.dp, RoundedCornerShape(10.dp))
-                            .clip(RoundedCornerShape(10.dp))
-                            .background(color)
-                            .border(
-                                width = 3.dp,
-                                color = if (eventState.selectedColor == colorInt) {
-                                    Color.Black
-                                } else Color.Transparent,
-                                shape = RoundedCornerShape(10.dp)
-                            )
-                            .clickable {
-                                scope.launch {
-                                    backGroundAnimation.animateTo(
-                                        targetValue = Color(colorInt),
-                                        animationSpec = tween(
-                                            durationMillis = 100
-                                        )
-                                    )
-                                }
-                                eventViewModel.onEvent(EventEvent.ChangeColor(colorInt))
-                            }
-                    ) // todo could be change
-                }
-            }
 
-
-            EventTextField(
-                text = eventTitleState.text,
-                hint = eventTitleState.hint,
-                onValueChange = {
-                    eventViewModel.onEvent(EventEvent.EnteredTitle(it))
-                },
-                onFocusChange = {
-                    eventViewModel.onEvent(EventEvent.ChangeTitleFocus(it))
-                },
-                isHintVisible = eventTitleState.isHintVisible,
-                singleLine = true,
-                textStyle = MaterialTheme.typography.h5
-            )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            EventTextField(
-                text = eventDescriptionState.text,
-                hint = eventDescriptionState.hint,
-                onValueChange = {
-                    eventViewModel.onEvent(EventEvent.EnteredDescription(it))
-                },
-                onFocusChange = {
-                    eventViewModel.onEvent(EventEvent.ChangeDescriptionFocus(it))
-                },
-                isHintVisible = eventDescriptionState.isHintVisible,
-                singleLine = false,
-                textStyle = MaterialTheme.typography.body1,
-                modifier = Modifier.fillMaxHeight()
-            )
-
-
+            ColorPickerHeader(backGroundAnimation, eventViewModel)
+            AddEventBody(eventViewModel)
         }
-
     }
+}
 
+@ExperimentalAnimationApi
+@Composable
+fun ColorPickerHeader(
+    backGroundAnimation: Animatable<Color, AnimationVector4D>,
+    eventViewModel: EventViewModel
+) {
+
+    val eventState = eventViewModel.state.value
+    val scope = rememberCoroutineScope()
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        eventState.colors.forEach { color ->
+            val colorInt = color.toArgb()
+            Box(
+                modifier = Modifier
+                    .size(50.dp)
+                    .shadow(15.dp, RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(10.dp))
+                    .background(color)
+                    .border(
+                        width = 3.dp,
+                        color = if (eventState.selectedColor == colorInt) {
+                            Color.Black
+                        } else Color.Transparent,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .clickable {
+                        scope.launch {
+                            backGroundAnimation.animateTo(
+                                targetValue = Color(colorInt),
+                                animationSpec = tween(
+                                    durationMillis = 100
+                                )
+                            )
+                        }
+                        eventViewModel.onEvent(EventEvent.ChangeColor(colorInt))
+                    })
+        }
+    }
+}
+
+@Composable
+fun AddEventBody(eventViewModel: EventViewModel) {
+
+    val eventTitleState = eventViewModel.eventTitle.value
+    val eventDescriptionState = eventViewModel.eventDescription.value
+
+    EventTextField(
+        text = eventTitleState.text,
+        hint = eventTitleState.hint,
+        onValueChange = {
+            eventViewModel.onEvent(EventEvent.EnteredTitle(it))
+        },
+        onFocusChange = {
+            eventViewModel.onEvent(EventEvent.ChangeTitleFocus(it))
+        },
+        isHintVisible = eventTitleState.isHintVisible,
+        singleLine = true,
+        textStyle = MaterialTheme.typography.h5
+    )
+
+
+    Spacer(modifier = Modifier.height(16.dp))
+
+
+
+    EventTextField(
+        text = eventDescriptionState.text,
+        hint = eventDescriptionState.hint,
+        onValueChange = {
+            eventViewModel.onEvent(EventEvent.EnteredDescription(it))
+        },
+        onFocusChange = {
+            eventViewModel.onEvent(EventEvent.ChangeDescriptionFocus(it))
+        },
+        isHintVisible = eventDescriptionState.isHintVisible,
+        singleLine = false,
+        textStyle = MaterialTheme.typography.body1,
+        modifier = Modifier.fillMaxHeight()
+    )
 
 }
+
