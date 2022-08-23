@@ -3,7 +3,6 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -29,15 +28,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.*
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.ScreenTopBarRow
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.getIconFromDrawable
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component.titleNotification
 
 @ExperimentalAnimationApi
 @Composable
@@ -172,11 +170,13 @@ fun DeleteCategoryAlertDialog(categoryViewModel: CategoryViewModel, category: Ca
 }
 
 @Composable
-fun AddManagerCategory(categoryViewModel: CategoryViewModel) { // todo event pass
-    val context = LocalContext.current
+fun AddManagerCategory(categoryViewModel: CategoryViewModel) {
+
     val showingDialog = remember { mutableStateOf(false) }
     val categoryState = categoryViewModel.state.value
-    val createMessage = "Please input Category Title" // todo message
+
+    val context = LocalContext.current
+
 
     if (showingDialog.value) {
         AlertDialog(
@@ -199,30 +199,18 @@ fun AddManagerCategory(categoryViewModel: CategoryViewModel) { // todo event pas
             confirmButton = {
                 TextButton(
                     onClick = {
-                        // todo categoryViewModel.onEvent(CategoryEvent.DeleteCategory(category))
-                        if (categoryState.categoryTitle.isNotBlank()) {
+                        val title = categoryState.categoryTitle
+                        if (!titleNotification(context, title)) {
                             showingDialog.value = false
                             categoryViewModel.onEvent(
                                 CategoryEvent.AddCategory(
                                     Category(
                                         title = categoryState.categoryTitle,
-                                        description = "some", // todo here
                                         icon = categoryState.selectedIcon
                                     )
                                 )
                             )
-
-                            Toast.makeText(
-                                context,
-                                "${categoryState.categoryTitle} Saved", // todo some toast test
-                                Toast.LENGTH_SHORT
-                            ).show()
-
-                        } else {
-                            Toast.makeText(context, createMessage, Toast.LENGTH_SHORT).show()
                         }
-
-
                     },
                     modifier = Modifier
                         .padding(10.dp)

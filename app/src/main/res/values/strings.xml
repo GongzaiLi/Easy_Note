@@ -1,13 +1,15 @@
 <resources>
-    <string name="app_name">ToDo Matter</string>
-    <string name="main_screen_name">ToDo Matter · %1$s</string>
-    <string name="drawer_header">ToDo Matter</string>
+    <string name="app_name">Easy Note</string>
+    <string name="main_screen_name">Easy Note · %1$s</string>
+    <string name="drawer_header">Easy Notes</string>
     <string name="category_edit">Manager Category</string>
     <string name="category_confirm_delete">Confirm Delete?</string>
     <string name="cancel_button">CANCEL</string>
     <string name="delete_button">DELETE</string>
-    <string name="delete_toast_message">Deleted successfully</string>
-    <string name="due_date">"%1$s %2$s, %3$s at %4$s:%5$s"</string>
+    <string name="delete_toast_message">Deleted Successfully</string>
+    <string name="due_date">%1$s %2$s, %3$s at %4$s:%5$s</string>
     <string name="add_category">Add Category</string>
     <string name="save_button">SAVE</string>
+    <string name="null_title_notification">Please Input Title …</string>
+    <string name="save_toast_message">%1$s Saved Successfully</string>
 </resources>

@@ -13,8 +13,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.util.exceptions.InvalidCategoryException
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.util.exceptions.InvalidEventException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -91,26 +89,20 @@ class EventViewModel @Inject constructor(
             }
             is EventEvent.AddEvent -> {
                 viewModelScope.launch {
-                    try {
-                        eventUseCases.addEvent(
-                            Event(
-                                id = selectedEventId,
-                                title = eventTitle.value.text,
-                                description = eventDescription.value.text,
-                                timestamp = event.time,
-                                color = state.value.selectedColor,
-                                categoryId = event.categoryId
-                            )
 
+                    eventUseCases.addEvent(
+                        Event(
+                            id = selectedEventId,
+                            title = eventTitle.value.text,
+                            description = eventDescription.value.text,
+                            timestamp = event.time,
+                            color = state.value.selectedColor,
+                            categoryId = event.categoryId
                         )
-                        _eventFlow.emit(UiEvent.SaveEvent)
-                    } catch (e: InvalidEventException) {
-                        _eventFlow.emit(
-                            UiEvent.ShowSnackbar(
-                                message = e.message ?: "Event Crete fail" // todo
-                            )
-                        )
-                    }
+
+                    )
+                    _eventFlow.emit(UiEvent.SaveEvent)
+
 
                 }
             }

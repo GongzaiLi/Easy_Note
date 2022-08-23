@@ -10,4 +10,6 @@
     <string name="due_date">"%1$s %2$s, %3$s at %4$s:%5$s"</string>
     <string name="add_category">Add Category</string>
     <string name="save_button">SAVE</string>
+    <string name="null_title_notification">SAVE</string>
+    <string name="save_toast_message">Saved Successfully</string>
 </resources>
