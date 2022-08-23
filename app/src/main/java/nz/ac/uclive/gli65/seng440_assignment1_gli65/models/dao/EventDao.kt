@@ -27,5 +27,5 @@ interface EventDao {
 
 
     @Query("SELECT COUNT(*) FROM event WHERE categoryId  = :categoryId")
-    fun getCountByCategoryId(categoryId: Long): Flow<Int> // why nor suspend
+    fun getCountByCategoryId(categoryId: Long): Flow<Int> // why not suspend
 }
