@@ -21,8 +21,7 @@ class EventViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    // todo ?????
-    private val _state = mutableStateOf(EventState()) // todo 多种状态
+    private val _state = mutableStateOf(EventState())
     val state: State<EventState> = _state
 
 
@@ -75,7 +74,6 @@ class EventViewModel @Inject constructor(
             }
         }
     }
-    // todo Up ============================
 
     private var getEventJob: Job? = null
 
@@ -138,7 +136,6 @@ class EventViewModel @Inject constructor(
     }
 
 
-    // todo many need fix
     private fun getEvents(categoryId: Long?) {
         var id = 1L // all type
         if (categoryId != null) {

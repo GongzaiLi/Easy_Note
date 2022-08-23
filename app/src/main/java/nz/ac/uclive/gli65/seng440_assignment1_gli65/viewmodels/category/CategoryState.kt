@@ -4,7 +4,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 
 data class CategoryState(
     val categories: List<Category> = emptyList(),
-    val pickCategory: Category? = null, // todo all
+    val pickCategory: Category? = null,
     val screenName: String = "",
 
     val categoryIcons: List<String> = listOf(

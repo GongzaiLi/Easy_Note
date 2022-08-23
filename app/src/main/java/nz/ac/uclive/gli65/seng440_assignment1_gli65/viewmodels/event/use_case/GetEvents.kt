@@ -1,7 +1,6 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.use_case
 
 import kotlinx.coroutines.flow.Flow
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.IEventRepository
 

@@ -14,19 +14,14 @@ class CategoryViewModel @Inject constructor(
     private val categoryUseCases: CategoryUseCases
 ) : ViewModel() {
 
-
-    // todo init
-
-    private val _state = mutableStateOf(CategoryState()) // todo 多种状态
+    private val _state = mutableStateOf(CategoryState())  // keep data
     val state: State<CategoryState> = _state
 
     init {
         getCategories()
-        //test()
     }
 
     private var getCategoryJob: Job? = null
-    private var getCategoryCountJob: Job? = null
 
     fun onEvent(event: CategoryEvent) {
         when (event) {
@@ -64,29 +59,14 @@ class CategoryViewModel @Inject constructor(
                 //getCategories()
                 updateCategoryNum()
             }
-
-
-//            is CategoryEvent.PickCategory -> {
-//
-//            }
-//            is CategoryEvent.GetCategories -> {
-//                useCases.getUseCase()
-//                    .onEach { categories ->
-//                        _state.value = state.value.copy(
-//                            categories = categories,
-//                        )
-//                    }
-//                    .launchIn(viewModelScope)
-//            }
         }
     }
 
     private fun getCategories() {
         getCategoryJob?.cancel()
 
-        // io
-        viewModelScope.launch {  // https://www.youtube.com/watch?v=6dRwaXH2cYA
-
+        // https://www.youtube.com/watch?v=6dRwaXH2cYA and io
+        viewModelScope.launch {
             categoryUseCases.getUseCase().collectLatest { categories ->
                 withContext(Dispatchers.IO) {
                     val newCategories = categories.map { category ->
@@ -94,7 +74,7 @@ class CategoryViewModel @Inject constructor(
                             categoryUseCases.getEventCount(category)
                         }
                         category.eventNumber = job.await().first()
-                        category // return
+                        category // return value
                     }
 
                     _state.value = state.value.copy(
@@ -106,19 +86,17 @@ class CategoryViewModel @Inject constructor(
             }
 
         }
-        //onFailure
     }
 
     private fun updateCategoryNum() {
 
-        viewModelScope.launch {  // https://www.youtube.com/watch?v=6dRwaXH2cYA
-
+        viewModelScope.launch {
             val newCategories = _state.value.categories.map { category ->
                 val job = async {
                     categoryUseCases.getEventCount(category)
                 }
                 category.eventNumber = job.await().first()
-                category // return
+                category // return value
             }
 
             _state.value = state.value.copy(

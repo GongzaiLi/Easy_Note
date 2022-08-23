@@ -7,7 +7,7 @@ class DeleteUseCase(
     private val repository: ICategoryRepository
 ) {
     suspend operator fun invoke(category: Category) {
-        repository.deleteCategory(category) // and update the event
+        repository.deleteCategory(category)
     }
 
 }

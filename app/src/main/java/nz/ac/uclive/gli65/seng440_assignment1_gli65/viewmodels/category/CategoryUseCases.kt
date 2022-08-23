@@ -7,5 +7,4 @@ data class CategoryUseCases(
     val deleteUseCase: DeleteUseCase,
     val addUseCase: AddUseCase,
     val getEventCount: GetEventCount,
-    //val pickCategory: PickCategoryUseCase,
 )

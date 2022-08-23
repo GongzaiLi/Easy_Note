@@ -16,7 +16,7 @@ data class EventState(
     ), // const value
 
 
-    val events: List<Event> = emptyList(), // todo order and section visible
+    val events: List<Event> = emptyList(),
     val isHintVisible: Boolean = true,
     val selectedColor: Int = TextWhite.toArgb()
 
