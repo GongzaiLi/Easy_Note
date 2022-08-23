@@ -219,7 +219,7 @@ fun AddManagerCategory(categoryViewModel: CategoryViewModel) { // todo event pas
                             ).show()
 
                         } else {
-                            Toast.makeText(context, createMessage, Toast.LENGTH_LONG).show()
+                            Toast.makeText(context, createMessage, Toast.LENGTH_SHORT).show()
                         }
 
 
@@ -343,30 +343,6 @@ fun IconPicker(categoryViewModel: CategoryViewModel) {
 
         }
     }
-
-
-//        DropdownMenu(
-//            expanded = isClick.value,
-//            onDismissRequest = {},
-//            Modifier.offset(10.dp, 10.dp)
-//
-//        ) {
-//            categoryState.categoryIcons.forEach {
-//                DropdownMenuItem(onClick = {
-//                    isClick.value = !isClick.value
-//                    categoryViewModel.onEvent(CategoryEvent.PickIcon(it))
-//                }) {
-//                    Icon(
-//                        painter = painterResource(id = getIconFromDrawable(it)),
-//                        contentDescription = null,
-//                        tint = TextWhite,
-//                        modifier = Modifier.size(22.dp)
-//                    )
-//
-//                }
-//            }
-//        }
-
 }
 
 
