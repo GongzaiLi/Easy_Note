@@ -9,13 +9,9 @@ interface ICategoryRepository { // Repository
 
     suspend fun insertCategory(category: Category): Long
 
-    suspend fun updateCategory(category: Category)
-
     suspend fun deleteCategory(category: Category)
 
     fun getCategories(): Flow<List<Category>>
-
-    fun getCountCategory(): Flow<Int>
 
     fun getCategoryById(categoryId: Long): Flow<Category>?
 }

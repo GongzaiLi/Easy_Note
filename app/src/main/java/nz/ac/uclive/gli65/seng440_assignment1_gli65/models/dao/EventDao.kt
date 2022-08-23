@@ -1,6 +1,5 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.models.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
@@ -8,11 +7,8 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Event
 @Dao
 interface EventDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE) // todo not sure
+    @Insert(onConflict = OnConflictStrategy.REPLACE) // add or update
     suspend fun insert(event: Event): Long
-
-    @Update
-    suspend fun update(event: Event)
 
     @Delete
     suspend fun delete(event: Event)

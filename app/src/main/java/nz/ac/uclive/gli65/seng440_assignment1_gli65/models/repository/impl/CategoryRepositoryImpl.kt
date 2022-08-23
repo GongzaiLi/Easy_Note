@@ -18,12 +18,6 @@ class CategoryRepositoryImpl(private val dao: CategoryDao) : ICategoryRepository
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    override suspend fun updateCategory(category: Category) {
-        dao.update(category)
-    }
-
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     override suspend fun deleteCategory(category: Category) {
         dao.delete(category)
     }
@@ -32,9 +26,6 @@ class CategoryRepositoryImpl(private val dao: CategoryDao) : ICategoryRepository
         return dao.getAll()
     }
 
-    override fun getCountCategory(): Flow<Int> {
-        return dao.getCount()
-    }
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
     override fun getCategoryById(categoryId: Long): Flow<Category>? {

@@ -11,6 +11,4 @@ data class Event(
     val description: String?,
     val categoryId: Long?, // todo not sure
     val color: Int,
-) {
-    // todo color
-}
+)

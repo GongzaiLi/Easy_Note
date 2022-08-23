@@ -10,7 +10,6 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 
 sealed class EventEvent {
     data class DeleteEvent(val event: Event) : EventEvent()
-    data class UpdateEvent(val event: Event) : EventEvent()
     data class GetEvents(val id: Long?) : EventEvent()
     data class AddEvent(val time: String, val categoryId: Long) : EventEvent()
 

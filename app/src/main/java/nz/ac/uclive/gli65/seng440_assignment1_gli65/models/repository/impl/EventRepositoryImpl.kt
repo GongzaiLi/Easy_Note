@@ -18,12 +18,6 @@ class EventRepositoryImpl(
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    override suspend fun update(event: Event) {
-        dao.update(event)
-    }
-
-    @Suppress("RedundantSuspendModifier")
-    @WorkerThread
     override suspend fun delete(event: Event) {
         dao.delete(event)
     }

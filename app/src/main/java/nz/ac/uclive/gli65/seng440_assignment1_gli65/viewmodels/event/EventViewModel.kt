@@ -106,11 +106,6 @@ class EventViewModel @Inject constructor(
 
                 }
             }
-            is EventEvent.UpdateEvent -> {
-                viewModelScope.launch {
-                    eventUseCases.updateEvent(event.event)
-                }
-            }
             is EventEvent.GetEvents -> {
                 getEvents(event.id)
             }

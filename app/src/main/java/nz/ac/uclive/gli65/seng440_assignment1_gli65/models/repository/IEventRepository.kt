@@ -9,8 +9,6 @@ interface IEventRepository {
 
     suspend fun insert(event: Event): Long
 
-    suspend fun update(event: Event)
-
     suspend fun delete(event: Event)
 
     fun findAll(): Flow<List<Event>>

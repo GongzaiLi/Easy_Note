@@ -68,7 +68,6 @@ object AppModule {
             getEvents = GetEvents(eventRepository),
             deleteEvent = DeleteEvent(eventRepository),
             addEvent = AddEvent(eventRepository),
-            updateEvent = UpdateEvent(eventRepository),
             getEvent = GetEvent(eventRepository)
         )
     }

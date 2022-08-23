@@ -37,7 +37,7 @@ import java.time.format.TextStyle
 import java.util.*
 import javax.security.auth.Subject
 
-@OptIn(ExperimentalMaterialApi::class)
+@ExperimentalMaterialApi
 @Composable
 fun EventBody(
     events: List<Event>,
@@ -48,7 +48,7 @@ fun EventBody(
     LazyColumn {
         itemsIndexed(
             items = events, key = { _, listItem -> listItem.hashCode() }
-        ) { index, event ->
+        ) { _, event ->
             val state = rememberDismissState(
                 confirmStateChange = {
                     if (it == DismissValue.DismissedToStart) {
