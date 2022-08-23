@@ -13,7 +13,7 @@ data class CategoryState(
         "ic_star_24",
         "ic_anchor_24",
         "ic_airplane_ticket_24",
-        "ic_breakfast_dining_24"
+        "ic_breakfast_dining_24",
     ),
 
     val selectedIcon: String = "ic_favorite_24",
@@ -21,4 +21,4 @@ data class CategoryState(
     val categoryTitle: String = "",
 
 
-)
+    )

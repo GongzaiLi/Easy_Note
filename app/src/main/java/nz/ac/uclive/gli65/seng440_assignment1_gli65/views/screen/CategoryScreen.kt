@@ -3,8 +3,10 @@ package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen
 import android.widget.Toast
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -14,6 +16,7 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,10 +29,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.entity.Category
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.LightRed
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.TextWhite
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.ui.theme.*
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen
@@ -62,15 +65,7 @@ fun CategoryScreenScaffold(navController: NavController, categoryViewModel: Cate
         },
         floatingActionButtonPosition = FabPosition.End,
         floatingActionButton = {
-            FloatingActionButton(onClick = {
-                navController.navigate(Screen.AddCategoryScreen.route)
-            }) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = null,
-                    tint = Color.White
-                )
-            }
+            AddManagerCategory(categoryViewModel)
         },
     ) {
         CategoryScreenBody(categoryViewModel)
@@ -84,7 +79,7 @@ fun CategoryScreenBody(categoryViewModel: CategoryViewModel) {
 
     LazyColumn {
         items(categoryState.categories) { category ->
-            val color: Color = LightRed  //
+            val color: Color = LightBlue  //
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
@@ -97,14 +92,14 @@ fun CategoryScreenBody(categoryViewModel: CategoryViewModel) {
                 Icon(
                     painter = painterResource(id = getIconFromDrawable(category.icon)),
                     contentDescription = null,
-                    tint = TextWhite,
+                    tint = Nevada,
                     modifier = Modifier.size(22.dp)
                 )
                 Spacer(modifier = Modifier.width(40.dp))
                 Text(
                     text = category.title,
                     style = TextStyle(fontSize = 22.sp),
-                    color = TextWhite,
+                    color = Nevada,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
                         .weight(0.8f)
@@ -160,7 +155,7 @@ fun DeleteCategoryAlertDialog(categoryViewModel: CategoryViewModel, category: Ca
                     modifier = Modifier
                         .padding(10.dp)
                 ) {
-                    Text(stringResource(id = R.string.cancel_button), color = Color.Green)
+                    Text(stringResource(id = R.string.cancel_button), color = Nevada)
                 }
             }
         )
@@ -175,5 +170,204 @@ fun DeleteCategoryAlertDialog(categoryViewModel: CategoryViewModel, category: Ca
         )
     }
 }
+
+@Composable
+fun AddManagerCategory(categoryViewModel: CategoryViewModel) { // todo event pass
+    val context = LocalContext.current
+    val showingDialog = remember { mutableStateOf(false) }
+    val categoryState = categoryViewModel.state.value
+    val createMessage = "Please input Category Title" // todo message
+
+    if (showingDialog.value) {
+        AlertDialog(
+            onDismissRequest = {
+                showingDialog.value = false
+            },
+            title = {
+                Text(
+                    text = stringResource(id = R.string.add_category),
+                    style = TextStyle(fontSize = 22.sp),
+                    color = Color.Black,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(top = 8.dp, bottom = 10.dp)
+                )
+            },
+            text = {
+                AddCategoryScreenBody(categoryViewModel)
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        // todo categoryViewModel.onEvent(CategoryEvent.DeleteCategory(category))
+                        if (categoryState.categoryTitle.isNotBlank()) {
+                            showingDialog.value = false
+                            categoryViewModel.onEvent(
+                                CategoryEvent.AddCategory(
+                                    Category(
+                                        title = categoryState.categoryTitle,
+                                        description = "some", // todo here
+                                        icon = categoryState.selectedIcon
+                                    )
+                                )
+                            )
+
+                            Toast.makeText(
+                                context,
+                                "${categoryState.categoryTitle} Saved", // todo some toast test
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                        } else {
+                            Toast.makeText(context, createMessage, Toast.LENGTH_LONG).show()
+                        }
+
+
+                    },
+                    modifier = Modifier
+                        .padding(10.dp)
+                ) {
+                    Text(stringResource(id = R.string.save_button), color = Color.Green)
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = {
+                        showingDialog.value = false
+                    },
+                    modifier = Modifier
+                        .padding(10.dp)
+                ) {
+                    Text(stringResource(id = R.string.cancel_button), color = Nevada)
+                }
+            })
+    }
+    FloatingActionButton(onClick = {
+        showingDialog.value = true
+
+
+        //navController.navigate(Screen.AddCategoryScreen.route)
+    }) {
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = null,
+            tint = Color.White
+        )
+    }
+
+
+}
+
+
+@Composable
+fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel) {
+
+    val categoryState = categoryViewModel.state.value
+
+    val isClick = remember { mutableStateOf(true) }
+
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        IconPicker(categoryViewModel)
+
+        OutlinedTextField(
+            textStyle = TextStyle(color = DarkGray),
+            value = categoryState.categoryTitle,
+            label = {
+                if (isClick.value) {
+                    Text(
+                        text = "Enter Category Title",
+                        color = Color.Black
+                    )
+                }
+            },
+            onValueChange = {
+                isClick.value = it.isBlank()
+                categoryViewModel.onEvent(CategoryEvent.UpdateCategoryTitle(it))
+            },
+            maxLines = 10,
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent
+            )
+        )
+
+        //Spacer(modifier = Modifier.width(40.dp))
+    }
+
+
+}
+
+@Composable
+fun IconPicker(categoryViewModel: CategoryViewModel) {
+
+
+    val isClick = rememberSaveable { mutableStateOf(false) }
+
+
+    val categoryState = categoryViewModel.state.value
+
+
+    Column(
+    ) {
+        if (!isClick.value) {
+            IconButton(onClick = { isClick.value = !isClick.value }) {
+                Icon(
+                    painter = painterResource(id = getIconFromDrawable(categoryState.selectedIcon)),
+                    contentDescription = null,
+                    tint = TextWhite,
+                    modifier = Modifier.size(22.dp)
+                )
+            }
+        } else {
+            LazyRow {
+                items(categoryState.categoryIcons) {
+                    IconButton(onClick = {
+                        isClick.value = !isClick.value
+                        categoryViewModel.onEvent(CategoryEvent.PickIcon(it))
+                    }) {
+                        Icon(
+                            painter = painterResource(id = getIconFromDrawable(it)),
+                            contentDescription = null,
+                            tint = TextWhite,
+                            modifier = Modifier.size(22.dp)
+                        )
+                    }
+
+                }
+            }
+
+        }
+    }
+
+
+//        DropdownMenu(
+//            expanded = isClick.value,
+//            onDismissRequest = {},
+//            Modifier.offset(10.dp, 10.dp)
+//
+//        ) {
+//            categoryState.categoryIcons.forEach {
+//                DropdownMenuItem(onClick = {
+//                    isClick.value = !isClick.value
+//                    categoryViewModel.onEvent(CategoryEvent.PickIcon(it))
+//                }) {
+//                    Icon(
+//                        painter = painterResource(id = getIconFromDrawable(it)),
+//                        contentDescription = null,
+//                        tint = TextWhite,
+//                        modifier = Modifier.size(22.dp)
+//                    )
+//
+//                }
+//            }
+//        }
+
+}
+
+
 
 

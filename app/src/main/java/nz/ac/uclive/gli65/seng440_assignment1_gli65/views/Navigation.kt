@@ -10,7 +10,6 @@ import androidx.navigation.navArgument
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.AddCategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.AddEventScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.CategoryScreen
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.screen.HomeScreen
@@ -87,31 +86,6 @@ fun Navigation() {
 
         }
 
-        composable(
-            route = Screen.AddCategoryScreen.route,
-            enterTransition = { _, _ ->
-                slideInHorizontally(
-                    initialOffsetX = { width },
-                    animationSpec = tween(
-                        durationMillis = 300,
-                        easing = FastOutSlowInEasing
-                    )
-                ) + fadeIn(animationSpec = tween(300))
-            },
-            popExitTransition = { _, _ ->
-                slideOutHorizontally(
-                    targetOffsetX = { width },
-                    animationSpec = tween(
-                        durationMillis = 300,
-                        easing = FastOutSlowInEasing
-                    )
-                ) + fadeOut(animationSpec = tween(300))
-            },
-        ) {
-
-            AddCategoryScreen(navController = navController)
-
-        }
 
         composable(
             route = Screen.AddEventScreen.route + "?eventId={eventId}&eventColor={eventColor}&categoryId={categoryId}",
