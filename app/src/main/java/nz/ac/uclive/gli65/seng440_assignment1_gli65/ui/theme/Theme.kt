@@ -29,6 +29,7 @@ private val DarkColorPalette = darkColors(
 
 @Composable
 fun Seng440_assignment1_gli65Theme(darkTheme: Boolean = true, content: @Composable() () -> Unit) {
+    // remove dark Theme
     MaterialTheme(
         colors = LightColorPalette,
         typography = Typography,
