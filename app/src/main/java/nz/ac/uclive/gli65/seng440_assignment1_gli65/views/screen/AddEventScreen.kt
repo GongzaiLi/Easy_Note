@@ -23,11 +23,13 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.CategoryEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
@@ -45,12 +47,17 @@ fun AddEventScreen(
     eventViewModel: EventViewModel = hiltViewModel(),
     categoryViewModel: CategoryViewModel = hiltViewModel<CategoryViewModel>(),
 ) {
+
+
     val eventState = eventViewModel.state.value
+
     val eventTitleState = eventViewModel.eventTitle.value
 
     val context = LocalContext.current
 
     val scaffoldState = rememberScaffoldState()
+
+    SetEmptyEvent(eventViewModel) // init event
 
 
     LaunchedEffect(key1 = true) {
@@ -199,6 +206,32 @@ fun AddEventBody(eventViewModel: EventViewModel) {
         textStyle = MaterialTheme.typography.body1,
         modifier = Modifier.fillMaxHeight()
     )
+
+}
+
+@Composable
+fun SetEmptyEvent(eventViewModel: EventViewModel) {
+
+    val eventTitle = eventViewModel.eventTitle.value
+    val eventDescription = eventViewModel.eventDescription.value
+
+    if (eventTitle.text.isBlank()) {
+        eventViewModel.onEvent(
+            EventEvent.SetUpEventTitle(
+                stringResource(id = R.string.enter_event_title)
+            )
+        )
+
+    }
+
+    if (eventDescription.text.isBlank()) {
+        eventViewModel.onEvent(
+            EventEvent.SetUpEventDescription(
+                stringResource(id = R.string.enter_event_description),
+            )
+        )
+
+    }
 
 }
 

@@ -81,7 +81,7 @@ fun EventBody(
                     ) {
                         Icon(
                             imageVector = Icons.Default.Delete,
-                            contentDescription = "Delete",
+                            contentDescription = null,
                             tint = Color.White,
                             modifier = Modifier.align(
                                 Alignment.CenterEnd

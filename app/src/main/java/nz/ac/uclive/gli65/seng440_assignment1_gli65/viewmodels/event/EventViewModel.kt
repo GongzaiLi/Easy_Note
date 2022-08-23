@@ -25,18 +25,10 @@ class EventViewModel @Inject constructor(
     val state: State<EventState> = _state
 
 
-    private val _eventTitle = mutableStateOf(
-        EventTextFieldState(
-            hint = "Enter title..."
-        )
-    )
+    private val _eventTitle = mutableStateOf(EventTextFieldState())
     val eventTitle: State<EventTextFieldState> = _eventTitle
 
-    private val _eventDescription = mutableStateOf(
-        EventTextFieldState(
-            hint = "Enter some description ..."
-        )
-    )
+    private val _eventDescription = mutableStateOf(EventTextFieldState())
     val eventDescription: State<EventTextFieldState> = _eventDescription
 
 
@@ -63,7 +55,6 @@ class EventViewModel @Inject constructor(
                         )
                         _eventDescription.value = eventDescription.value.copy(
                             text = it.description ?: "",
-                            hint = if (it.description == null || it.description.isBlank()) "Enter some description ..." else "",
                             isHintVisible = it.description == null || it.description.isBlank()
                         )
                         _state.value = state.value.copy(
@@ -130,6 +121,16 @@ class EventViewModel @Inject constructor(
             is EventEvent.ChangeColor -> {
                 _state.value = state.value.copy(
                     selectedColor = event.color
+                )
+            }
+            is EventEvent.SetUpEventTitle -> {
+                _eventTitle.value = _eventTitle.value.copy(
+                    hint = event.hint,
+                )
+            }
+            is EventEvent.SetUpEventDescription -> {
+                _eventDescription.value = eventDescription.value.copy(
+                    hint = event.hint
                 )
             }
         }

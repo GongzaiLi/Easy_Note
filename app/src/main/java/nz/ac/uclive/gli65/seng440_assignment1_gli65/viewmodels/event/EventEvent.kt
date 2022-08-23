@@ -14,6 +14,6 @@ sealed class EventEvent {
     data class EnteredDescription(val text: String) : EventEvent()
     data class ChangeDescriptionFocus(val focusState: FocusState): EventEvent()
     data class ChangeColor(val color: Int): EventEvent()
-
-
+    data class SetUpEventTitle(val hint: String): EventEvent()
+    data class SetUpEventDescription(val hint: String): EventEvent()
 }
