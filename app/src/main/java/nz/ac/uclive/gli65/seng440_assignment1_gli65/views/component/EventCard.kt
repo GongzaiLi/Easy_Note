@@ -1,6 +1,7 @@
 package nz.ac.uclive.gli65.seng440_assignment1_gli65.views.component
 
 import android.content.Intent
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -42,6 +43,10 @@ fun EventBody(
     eventViewModel: EventViewModel,
     categoryViewModel: CategoryViewModel
 ) {
+
+    val context = LocalContext.current
+    val deleteMessage = stringResource(id = R.string.delete_toast_message)
+
     LazyColumn {
         itemsIndexed(
             items = events, key = { _, listItem -> listItem.hashCode() }
@@ -51,6 +56,11 @@ fun EventBody(
                     if (it == DismissValue.DismissedToStart) {
                         eventViewModel.onEvent(EventEvent.DeleteEvent(event))
                         categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)
+                        Toast.makeText(
+                            context,
+                            deleteMessage,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     true
                 }
