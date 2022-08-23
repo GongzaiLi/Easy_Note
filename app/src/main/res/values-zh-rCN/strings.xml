@@ -14,4 +14,6 @@
     <string name="save_toast_message">Saved Successfully</string>
     <string name="enter_event_title">Enter title…</string>
     <string name="enter_event_description">Enter some description …</string>
+    <string name="enter_category_title">Enter Category Title …</string>
+
 </resources>

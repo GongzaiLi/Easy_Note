@@ -102,7 +102,7 @@ fun CategoryScreenBody(categoryViewModel: CategoryViewModel) {
                         .align(Alignment.CenterVertically)
                         .weight(0.8f)
                 )
-                if (category.title != "All" && category.id != 1L) {
+                if (category.id != 1L) { // category id 1 always all
                     DeleteCategoryAlertDialog(categoryViewModel, category)
                 }
 
@@ -267,7 +267,7 @@ fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel) {
             label = {
                 if (isClick.value) {
                     Text(
-                        text = "Enter Category Title",
+                        text = stringResource(id = R.string.enter_category_title),
                         color = Nevada
                     )
                 }
