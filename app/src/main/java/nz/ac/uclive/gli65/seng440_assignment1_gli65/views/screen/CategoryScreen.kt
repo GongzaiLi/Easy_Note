@@ -166,7 +166,7 @@ fun DeleteCategoryAlertDialog(categoryViewModel: CategoryViewModel, category: Ca
         Icon(
             imageVector = Icons.Default.Delete,
             contentDescription = null,
-            tint = TextWhite,
+            tint = DarkGray,
         )
     }
 }
@@ -274,13 +274,13 @@ fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel) {
         IconPicker(categoryViewModel)
 
         OutlinedTextField(
-            textStyle = TextStyle(color = DarkGray),
+            textStyle = TextStyle(color = Nevada),
             value = categoryState.categoryTitle,
             label = {
                 if (isClick.value) {
                     Text(
                         text = "Enter Category Title",
-                        color = Color.Black
+                        color = Nevada
                     )
                 }
             },
@@ -292,7 +292,8 @@ fun AddCategoryScreenBody(categoryViewModel: CategoryViewModel) {
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color.Transparent,
                 unfocusedBorderColor = Color.Transparent
-            )
+            ),
+            singleLine = true
         )
 
         //Spacer(modifier = Modifier.width(40.dp))
@@ -318,7 +319,7 @@ fun IconPicker(categoryViewModel: CategoryViewModel) {
                 Icon(
                     painter = painterResource(id = getIconFromDrawable(categoryState.selectedIcon)),
                     contentDescription = null,
-                    tint = TextWhite,
+                    tint = Nevada,
                     modifier = Modifier.size(22.dp)
                 )
             }
@@ -332,7 +333,7 @@ fun IconPicker(categoryViewModel: CategoryViewModel) {
                         Icon(
                             painter = painterResource(id = getIconFromDrawable(it)),
                             contentDescription = null,
-                            tint = TextWhite,
+                            tint = Nevada,
                             modifier = Modifier.size(22.dp)
                         )
                     }

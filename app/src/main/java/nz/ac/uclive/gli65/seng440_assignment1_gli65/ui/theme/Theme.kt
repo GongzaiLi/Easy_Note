@@ -9,10 +9,10 @@ import androidx.compose.ui.graphics.Color
 
 @SuppressLint("ConflictingOnColor") // todo
 private val LightColorPalette = lightColors(
-    primary = LightGray,
-    background = LightGray,
-    onBackground = LightGray,
-    surface = LightGray,
+    primary = Fog,
+    background = Fog,
+    onBackground = Fog,
+    surface = Fog,
     onSurface = DarkGray,
     //primaryVariant = Color.Blue,
 )

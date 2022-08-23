@@ -39,6 +39,10 @@ class CategoryViewModel @Inject constructor(
             is CategoryEvent.AddCategory -> {
                 viewModelScope.launch {
                     categoryUseCases.addUseCase(event.category)
+                    _state.value = state.value.copy(
+                        selectedIcon = _state.value.categoryIcons.get(0),
+                        categoryTitle = ""
+                    )
                 }
             }
             is CategoryEvent.PickCategory -> {

@@ -14,6 +14,7 @@ val AquaBlue = Color(0xFF9AA5C4)
 val LightRed = Color(0xfffc879a)
 val GrayWhite = Color(0xFFD6D5CB)
 val DeepGray = Color(0xFFA9A9A9)
+val Fog = Color(0xFFF2F8F7)
 
 val RedOrange = Color(0xffffab91)
 val RedPink = Color(0xfff48fb1)
