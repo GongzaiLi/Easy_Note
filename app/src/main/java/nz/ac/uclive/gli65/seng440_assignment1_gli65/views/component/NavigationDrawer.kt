@@ -6,13 +6,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.material.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,7 +50,7 @@ fun DrawerHeader() {
             )
             Spacer(modifier = Modifier.width(40.dp))
             Text(
-                text = stringResource(R.string.drawer_header), // todo R.string
+                text = stringResource(R.string.drawer_header),
                 modifier = Modifier.weight(1f),
                 style = TextStyle(fontSize = 20.sp),
                 color = color
@@ -68,7 +65,7 @@ fun DrawerHeader() {
 @Composable
 fun DrawerBody(
     categories: List<Category>,
-    onClick: (Category) -> Unit, // todo change when
+    onClick: (Category) -> Unit,
     onFooterClick: () -> Unit
 ) {
     LazyColumn(
@@ -130,7 +127,7 @@ fun DrawerBody(
 
 @Composable
 fun DrawerFooter(onClick: () -> Unit) {
-    Divider(color = LightGray, thickness = 1.dp)
+    Divider(color = DeepGray, thickness = 1.dp)
     Row(
         modifier = Modifier
             .fillMaxWidth()

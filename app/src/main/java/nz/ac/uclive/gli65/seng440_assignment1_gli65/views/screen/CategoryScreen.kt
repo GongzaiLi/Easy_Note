@@ -120,8 +120,8 @@ fun CategoryScreenBody(categoryViewModel: CategoryViewModel) {
 
 @Composable
 fun DeleteCategoryAlertDialog(categoryViewModel: CategoryViewModel, category: Category) {
-    val showingDialog = remember { mutableStateOf(false) }
     val context = LocalContext.current
+    val showingDialog = remember { mutableStateOf(false) }
     val deleteMessage = stringResource(id = R.string.delete_toast_message)
     if (showingDialog.value) {
         AlertDialog(

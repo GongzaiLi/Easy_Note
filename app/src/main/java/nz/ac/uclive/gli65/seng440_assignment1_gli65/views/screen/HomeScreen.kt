@@ -98,7 +98,7 @@ fun HomeScreenScaffold(
 
         },
         floatingActionButtonPosition = FabPosition.End,
-        floatingActionButton = {
+        floatingActionButton = { //
             FloatingActionButton(onClick = {
                 navController.navigate(Screen.AddEventScreen.route + "?categoryId=${categoryState.pickCategory?.id}")
             }) {
