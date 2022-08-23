@@ -22,8 +22,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import kotlinx.coroutines.launch
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.R
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryEvent
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryViewModel
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.CategoryEvent
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.CategoryViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventEvent
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventViewModel
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.views.Screen

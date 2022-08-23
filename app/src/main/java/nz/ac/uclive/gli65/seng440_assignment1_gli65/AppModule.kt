@@ -11,7 +11,7 @@ import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.ICategoryR
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.IEventRepository
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.impl.CategoryRepositoryImpl
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.models.repository.impl.EventRepositoryImpl
-import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.CategoryUseCases
+import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.CategoryUseCases
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.EventUseCases
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.event.use_case.*
 import nz.ac.uclive.gli65.seng440_assignment1_gli65.viewmodels.category.use_case.AddUseCase
