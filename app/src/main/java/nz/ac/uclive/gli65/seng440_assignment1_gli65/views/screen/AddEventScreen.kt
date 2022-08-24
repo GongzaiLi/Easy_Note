@@ -44,10 +44,10 @@ fun AddEventScreen(
     navController: NavController,
     eventColor: Int,
     categoryId: Long,
+    isEdit: Boolean,
     eventViewModel: EventViewModel = hiltViewModel(),
     categoryViewModel: CategoryViewModel = hiltViewModel<CategoryViewModel>(),
 ) {
-
 
     val eventState = eventViewModel.state.value
 
@@ -92,7 +92,8 @@ fun AddEventScreen(
                     eventViewModel.onEvent(
                         EventEvent.AddEvent(
                             LocalDateTime.now().toString(),
-                            categoryId
+                            categoryId,
+                            isEdit
                         )
                     )
                     categoryViewModel.onEvent(CategoryEvent.UpdateEventCount)

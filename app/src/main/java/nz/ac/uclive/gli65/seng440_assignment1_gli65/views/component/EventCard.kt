@@ -90,7 +90,7 @@ fun EventBody(
                     }
                 },
                 dismissContent = {
-                    Card(event, navController, categoryViewModel)
+                    Card(event, navController)
                 },
                 directions = setOf(DismissDirection.EndToStart)
             )
@@ -101,9 +101,7 @@ fun EventBody(
 }
 
 @Composable
-fun Card(event: Event, navController: NavController, categoryViewModel: CategoryViewModel) {
-
-    val categoryState = categoryViewModel.state.value
+fun Card(event: Event, navController: NavController) {
 
     Row(
         verticalAlignment = Alignment.CenterVertically,
@@ -115,7 +113,7 @@ fun Card(event: Event, navController: NavController, categoryViewModel: Category
             .padding(horizontal = 15.dp, vertical = 20.dp)
             .fillMaxWidth()
             .clickable {
-                navController.navigate(Screen.AddEventScreen.route + "?eventId=${event.id}&eventColor=${event.color}&categoryId=${categoryState.pickCategory?.id}")
+                navController.navigate(Screen.AddEventScreen.route + "?eventId=${event.id}&eventColor=${event.color}&isEdit=${true}")
             }
     ) {
         Column {

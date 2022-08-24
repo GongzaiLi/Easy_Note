@@ -89,7 +89,7 @@ fun Navigation() {
 
 
         composable(
-            route = Screen.AddEventScreen.route + "?eventId={eventId}&eventColor={eventColor}&categoryId={categoryId}",
+            route = Screen.AddEventScreen.route + "?eventId={eventId}&eventColor={eventColor}&categoryId={categoryId}&isEdit={isEdit}",
             arguments = listOf(
                 navArgument(
                     name = "eventId",
@@ -108,6 +108,12 @@ fun Navigation() {
                 ) {
                     type = NavType.LongType
                     defaultValue = 1L
+                },
+                navArgument(
+                    name = "isEdit",
+                ) {
+                    type = NavType.BoolType
+                    defaultValue = false
                 },
 
                 ),
@@ -132,11 +138,13 @@ fun Navigation() {
         ) {
             val color = it.arguments?.getInt("eventColor") ?: -1
             val categoryId = it.arguments?.getLong("categoryId") ?: 1
+            val isEdit = it.arguments?.get("isEdit") ?: false
 
             AddEventScreen(
                 navController = navController,
                 eventColor = color,
-                categoryId = categoryId
+                categoryId = categoryId,
+                isEdit = isEdit as Boolean,
             )
 
         }

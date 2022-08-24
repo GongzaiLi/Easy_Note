@@ -42,6 +42,7 @@ class EventViewModel @Inject constructor(
     }
 
     private var selectedEventId: Long? = null
+    private var selectedCategoryId: Long? = 1L
 
     init {
         savedStateHandle.get<Long>("eventId")?.let { id ->
@@ -49,6 +50,7 @@ class EventViewModel @Inject constructor(
                 viewModelScope.launch {
                     eventUseCases.getEvent(id)?.also {
                         selectedEventId = it.id
+                        selectedCategoryId = it.categoryId
                         _eventTitle.value = eventTitle.value.copy(
                             text = it.title,
                             isHintVisible = false
@@ -78,6 +80,10 @@ class EventViewModel @Inject constructor(
             }
             is EventEvent.AddEvent -> {
                 viewModelScope.launch {
+                    var categoryId: Long? = event.categoryId
+                    if (event.isEdit) {
+                        categoryId = selectedCategoryId
+                    }
 
                     eventUseCases.addEvent(
                         Event(
@@ -86,7 +92,7 @@ class EventViewModel @Inject constructor(
                             description = eventDescription.value.text,
                             timestamp = event.time,
                             color = state.value.selectedColor,
-                            categoryId = event.categoryId
+                            categoryId = categoryId,
                         )
 
                     )
@@ -124,7 +130,7 @@ class EventViewModel @Inject constructor(
                 )
             }
             is EventEvent.SetUpEventTitle -> {
-                _eventTitle.value = _eventTitle.value.copy(
+                _eventTitle.value = eventTitle.value.copy(
                     hint = event.hint,
                 )
             }
