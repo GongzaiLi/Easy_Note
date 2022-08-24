@@ -1,5 +1,2 @@
-# ToDo Matter
+# Easy Note
 
-- Birthday Day
-- Any important day
-- Todo list
